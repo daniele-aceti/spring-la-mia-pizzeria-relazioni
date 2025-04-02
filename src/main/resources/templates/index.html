@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <div th:replace="~{fragments/header :: head}"></div>
+    <title>Spring library</title>
+  </head>
+
+  <body>
+    <div th:if="${list.isEmpty()}">
+      <p>La lista è vuota</p>
+    </div>
+
+    <div th:unless="${list.isEmpty()}">
+      <table>
+        <thead>
+          <tr>
+            <th>Nome Pizza</th>
+            <th>Descrizione</th>
+            <th>Foto</th>
+            <th>prezzo</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr th:each="pizza : ${pizzaList}">
+            <td th:text="${pizza.nome}"></td>
+            <td th:text="${pizza.descrizione}"></td>
+            <td th:text="${pizza.foto}"></td>
+            <td th:text="${pizza.prezzo}"></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div th:replace="~{fragments/header :: bootstrapScript}"></div>
+  </body>
+</html>
