@@ -23,6 +23,6 @@ public class PizzaController {
     public String index(Model model) {
         List<Pizza> result = pizzaRepository.findAll();
         model.addAttribute("pizzaList", result);
-        return "index";
+        return "pizze/index";
     }
 }
