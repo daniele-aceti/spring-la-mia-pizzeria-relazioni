@@ -11,7 +11,7 @@
     </div>
 
     <div th:unless="${pizzaList.isEmpty()}">
-      <table>
+<!--       <table>
         <thead>
           <tr>
             <th>Nome Pizza</th>
@@ -28,7 +28,14 @@
             <td th:text="${pizza.prezzo}"></td>
           </tr>
         </tbody>
-      </table>
+      </table> -->
+
+      <h1>PIZZERIA</h1>
+
+      <div th:each="pizza : ${pizzaList}">
+        <img th:src="${pizza.foto}">
+      </div>
+
     </div>
 
     <div th:replace="fragments/header :: bootstrapScript"></div>

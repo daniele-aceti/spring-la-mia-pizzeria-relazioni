@@ -12,14 +12,24 @@ import pizzeria.spring_la_mia_pizzeria_crud.model.Pizza;
 import pizzeria.spring_la_mia_pizzeria_crud.repository.PizzaRepository;
 
 @Controller
-@RequestMapping("/pizze")
+@RequestMapping("/")
 
 public class PizzaController {
 
     @Autowired
     private PizzaRepository pizzaRepository;
 
-    @GetMapping
+    @GetMapping("/home")
+    public String primaPagina(Model model) {
+        return "pizze/primaPagina";
+    }
+
+    @GetMapping("/loading")
+    public String loading(Model model) {
+        return "pizze/loading";
+    }
+
+    @GetMapping("/pizze")
     public String index(Model model) {
         List<Pizza> result = pizzaRepository.findAll();
         model.addAttribute("pizzaList", result);
