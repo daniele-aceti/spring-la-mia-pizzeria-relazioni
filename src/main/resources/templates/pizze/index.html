@@ -3,7 +3,7 @@
   <head>
     <div th:replace="fragments/header :: head"></div>
     <link rel="stylesheet" href="/css/indexStyle.css" />
-   
+
     <title>Pizzeria</title>
   </head>
 
@@ -11,41 +11,24 @@
 
   <body>
     <div th:if="${pizzaList.isEmpty()}">
-      <p>La lista è vuota</p>
+      <p class="text-light">La lista è vuota</p>
     </div>
 
     <div th:unless="${pizzaList.isEmpty()}">
-      <!--       <table>
-        <thead>
-          <tr>
-            <th>Nome Pizza</th>
-            <th>Descrizione</th>
-            <th>Foto</th>
-            <th>prezzo</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr th:each="pizza : ${pizzaList}">
-            <td th:text="${pizza.nome}"></td>
-            <td th:text="${pizza.descrizione}"></td>
-            <td th:text="${pizza.foto}"></td>
-            <td th:text="${pizza.prezzo}"></td>
-          </tr>
-        </tbody>
-      </table> -->
+      <h1 class="text-danger container ms-1">PIZZERIA</h1>
 
-      <h1 class="text-danger">PIZZERIA</h1>
-
-      <div id="pizze">
-        <span th:each="pizza : ${pizzaList}">
+      <div id="pizze" class="container row row-cols-2 me-5">
+        <span class="mt-5" th:each="pizza : ${pizzaList}">
           <h2 class="text-light" th:text="${pizza.nome}"></h2>
-          <img th:src="${pizza.foto}" />
+          <a th:href="@{/pizze/{id}(id=${pizza.id})}">
+            <img th:src="${pizza.foto}" />
+          </a>
           <span class="text-light" th:text="${pizza.descrizione}"></span>
-          <span class="text-light" th:text="${prezzo}"></span>
+          <span class="text-light" th:text="${pizza.prezzo}"></span>
         </span>
       </div>
     </div>
- 
     <div th:replace="fragments/header :: bootstrapScript"></div>
+    <div th:replace="fragments/footer :: footer"></div>
   </body>
 </html>

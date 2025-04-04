@@ -13,6 +13,7 @@ import pizzeria.spring_la_mia_pizzeria_crud.model.Pizza;
 import pizzeria.spring_la_mia_pizzeria_crud.repository.PizzaRepository;
 
 
+
 @Controller
 @RequestMapping("/")
 
@@ -46,7 +47,13 @@ public class PizzaController {
                 model.addAttribute("pizzaId", result);
             }
         }
-        return "dettaglioPizza";
+        return "pizze/dettaglioPizza";
     }
+
+    @GetMapping("/contatti")
+    public String contatti() {
+        return "pizze/contatti";
+    }
+    
     
 }
