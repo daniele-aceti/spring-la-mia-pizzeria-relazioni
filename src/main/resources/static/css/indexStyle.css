@@ -1,0 +1,23 @@
+body{
+    background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,1)), url('/img/sfondo_index.jpg');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    height: 100vh;
+    margin: 0;
+
+}
+
+img{
+    max-width: 30%;
+    max-height: 200px;
+    display: flex;
+}
+
+h1{
+    text-align: center;
+}
+
+#pizze{
+   margin-left: 10%;
+}

@@ -2,8 +2,12 @@
 <html xmlns:th="http://www.thymeleaf.org">
   <head>
     <div th:replace="fragments/header :: head"></div>
+    <link rel="stylesheet" href="/css/indexStyle.css" />
+   
     <title>Pizzeria</title>
   </head>
+
+  <div th:replace="fragments/navbar :: navbar"></div>
 
   <body>
     <div th:if="${pizzaList.isEmpty()}">
@@ -11,7 +15,7 @@
     </div>
 
     <div th:unless="${pizzaList.isEmpty()}">
-<!--       <table>
+      <!--       <table>
         <thead>
           <tr>
             <th>Nome Pizza</th>
@@ -30,14 +34,18 @@
         </tbody>
       </table> -->
 
-      <h1>PIZZERIA</h1>
+      <h1 class="text-danger">PIZZERIA</h1>
 
-      <div th:each="pizza : ${pizzaList}">
-        <img th:src="${pizza.foto}">
+      <div id="pizze">
+        <span th:each="pizza : ${pizzaList}">
+          <h2 class="text-light" th:text="${pizza.nome}"></h2>
+          <img th:src="${pizza.foto}" />
+          <span class="text-light" th:text="${pizza.descrizione}"></span>
+          <span class="text-light" th:text="${prezzo}"></span>
+        </span>
       </div>
-
     </div>
-
+ 
     <div th:replace="fragments/header :: bootstrapScript"></div>
   </body>
 </html>
