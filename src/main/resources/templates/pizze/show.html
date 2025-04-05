@@ -6,15 +6,20 @@
     <div th:replace="fragments/header :: head"></div>
     <link rel="stylesheet" href="/css/indexStyle.css" />
   </head>
-<body>
-  <div th:replace="fragments/navbar :: navbar"></div>
-  <h1 class="text-danger">ECCO LA PIZZA CHE CERCAVI</h1>
-  <div th:object="${pizza}">
-       <img th:src="*{foto}" />
-      <p class="text-light" th:text="*{descrizione}"></p>
-  </div>
+  <body>
+    <div th:replace="fragments/navbar :: navbar"></div>
+    <h1 class="text-danger">ECCO LA PIZZA CHE CERCAVI</h1>
+    <main class="container">
+      <div th:object="${pizza}">
+        <div class="d-flex justify-content-center">
+          <img class="img-fluid mt-5" th:src="*{foto}" />
+        </div>
+        <h2 class="text-light text-center" th:text="*{nome}"></h2>
+        <p class="text-danger text-center">Descrizione:</p>
+        <p class="text-danger text-center" th:text="*{descrizione}"></p>
+      </div>
+    </main>
 
- 
-<div th:replace="fragments/header :: bootstrapScript"></div>
-</body>
+    <div th:replace="fragments/header :: bootstrapScript"></div>
+  </body>
 </html>

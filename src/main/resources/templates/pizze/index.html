@@ -6,30 +6,16 @@
 
     <title>Pizzeria</title>
   </head>
-
-  <div th:replace="fragments/navbar :: navbar"></div>
-
+  
   <body  class="img-fluid">
- <!--    <div th:if="${pizzaList.isEmpty()}">
-      <p class="text-light">La lista è vuota</p>
-    </div>
-
-    <div th:unless="${pizzaList.isEmpty()}">
-      <h1 class="text-danger container ms-1">PIZZERIA</h1>
-
-      <div id="pizze" class="container row row-cols-2 me-5">
-        <span class="mt-5" th:each="pizza : ${pizzaList}">
-          <h2 class="text-light" th:text="${pizza.nome}"></h2>
-          <a th:href="@{/pizze/{id}(id=${pizza.id})}">
-            <img th:src="${pizza.foto}" />
-          </a>
-          <span class="text-light" th:text="${pizza.descrizione}"></span>
-          <span class="text-light" th:text="${pizza.prezzo}"></span>
-        </span>
-      </div>
-    </div> -->
-    <div th:replace="fragments/cardImg :: card" ></div>
+    <header>
+      <div th:replace="fragments/navbar :: navbar"></div>
+    </header>
+    <main th:replace="fragments/cardImg :: card">
+    </main>
+    <footer>
+      <div th:replace="fragments/footer :: footer"></div>
+    </footer>
     <div th:replace="fragments/header :: bootstrapScript"></div>
-    <div th:replace="fragments/footer :: footer"></div>
   </body>
 </html>

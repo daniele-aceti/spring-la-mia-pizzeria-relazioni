@@ -5,35 +5,28 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <div th:replace="fragments/header :: head"></div>
   </head>
-<body class="container">
-    <div th:fragment="card">
-        <div th:if="${pizzaList.isEmpty()}">
-            <p class="text-light">La lista è vuota</p>
-          </div>
-        <div  id="pizze" th:unless="${pizzaList.isEmpty()}" class="card bg-transparent " style="width: 18rem;">
-            <span class="mt-5" th:each="pizza : ${pizzaList}">
-                <a class="d-flex justify-content-center" th:href="@{|pizze/${pizza.id}|}">
-                    <img th:src="${pizza.foto}" />
-                  </a>
-            <div class="card-body ">
-                <div class="card bg-transparent">
-                    <div class="card-header">
-                      <ul class="nav nav-tabs card-header-tabs">
-                        <li class="nav-item">
-                          <a  class="nav-link active text-danger bg-transparent text-center" aria-current="true"th:href="@{|pizze/${pizza.id}|}">PIZZA</a>
-                          <div class="card-body">
-                            <h5 th:text="${pizza.nome}" class="card-title text-light"></h5>
-                            <p th:text="${pizza.descrizione}" class="card-text text-light ms-2"></p>
-                            <h5 th:text="${pizza.prezzo}" class="card-title text-light text-center"></h5>
-                          </div>
-                        </div>
-                      </ul>
-                    </div>
+<body class="container" th:fragment="card">
+                      <div th:if="${pizzaList.isEmpty()}">
+      <p class="text-light">La lista è vuota</p>
+    </div>
 
+    <div th:unless="${pizzaList.isEmpty()}">
+      <h1 class="text-danger container ms-1">SELEZIONATE PER VOI</h1>
+
+      <div id="pizze" class="container row row-cols-2 me-5">
+        <span class="mt-5" th:each="pizza : ${pizzaList}">
+          <h2 class="text-light" th:text="${pizza.nome}"></h2>
+          <a th:href="@{|pizze/${pizza.id}|}">
+            <img th:src="${pizza.foto}" />
+          </a>
+          <span class="text-light" th:text="${pizza.descrizione}"></span>
+          <div class="text-light" th:text="${pizza.prezzo}"></div>
+        </span>
+      </div>
+    </div>
             </div>
           </div> 
         </span>
-    </div>
 <div th:replace="fragments/header :: bootstrapScript"></div>
 </body>
 </html>

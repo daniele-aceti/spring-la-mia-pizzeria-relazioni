@@ -6,13 +6,16 @@
     <div th:replace="fragments/header :: head"></div>
     <link rel="stylesheet" href="/css/indexStyle.css" />
   </head>
-<body>
-  <div th:replace="fragments/navbar :: navbar"></div>
-  <h1 class="text-danger">ERRORE</h1>
-  <p class="text-light" th:text="${errorCause}"></p>
+  <body>
+    <div th:replace="fragments/navbar :: navbar"></div>
+    <main class="container ">
+      <div class="d-flex justify-content-center">
+          <img class="img-fluid mt-5" src="/img/error.png" alt="loading" />
+      </div>
+      <h2 class="text-danger text-center">ERRORE</h2>
+      <p class="text-danger text-center" th:text="${errorCause}"></p>
+    </main>
 
-
- 
-<div th:replace="fragments/header :: bootstrapScript"></div>
-</body>
+    <div th:replace="fragments/header :: bootstrapScript"></div>
+  </body>
 </html>

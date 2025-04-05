@@ -36,7 +36,7 @@ public class PizzaController {
     public String index(Model model,@RequestParam(name="keyword", required= false) String findPizza) {
         List<Pizza> result;
         if(findPizza != null && !findPizza.isBlank()){
-            result = pizzaRepository.findByNomeContainingIgnoreCase(findPizza);
+            result = pizzaRepository.findByNomeIgnoreCase(findPizza);
         }else{
             result = pizzaRepository.findAll();
         }
@@ -51,7 +51,7 @@ public class PizzaController {
             model.addAttribute("pizza", pizzaRepository.findById(id).get());
             return "pizze/show";
         }
-        model.addAttribute("errorCause", "La pizza da te cercata con " + id + "non esiste");
+        model.addAttribute("errorCause", "La pizza da te cercata con id " + id + " non esiste");
         return "pizze/error";
     }
 
