@@ -9,8 +9,8 @@
 
   <div th:replace="fragments/navbar :: navbar"></div>
 
-  <body>
-    <div th:if="${pizzaList.isEmpty()}">
+  <body  class="img-fluid">
+ <!--    <div th:if="${pizzaList.isEmpty()}">
       <p class="text-light">La lista è vuota</p>
     </div>
 
@@ -27,7 +27,8 @@
           <span class="text-light" th:text="${pizza.prezzo}"></span>
         </span>
       </div>
-    </div>
+    </div> -->
+    <div th:replace="fragments/cardImg :: card" ></div>
     <div th:replace="fragments/header :: bootstrapScript"></div>
     <div th:replace="fragments/footer :: footer"></div>
   </body>

@@ -1,6 +1,7 @@
 package pizzeria.spring_la_mia_pizzeria_crud.controller;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -12,17 +13,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import pizzeria.spring_la_mia_pizzeria_crud.model.Pizza;
 import pizzeria.spring_la_mia_pizzeria_crud.repository.PizzaRepository;
 
-
-
 @Controller
-@RequestMapping("/")
+@RequestMapping
 
 public class PizzaController {
 
     @Autowired
     private PizzaRepository pizzaRepository;
 
-    @GetMapping("/home")
+    @GetMapping
     public String primaPagina(Model model) {
         return "pizze/primaPagina";
     }
@@ -40,20 +39,19 @@ public class PizzaController {
     }
 
     @GetMapping("pizze/{id}")
-    public String findPizza(@PathVariable("id")Integer id,Model model) {
-        List<Pizza> result = pizzaRepository.findAll();
-        for(Pizza pizzaId : result){
-            if(pizzaId.getId().equals(id)){
-                model.addAttribute("pizzaId", result);
-            }
+    public String show(@PathVariable("id") Integer id, Model model) {
+        Optional<Pizza> optionPizza = pizzaRepository.findById(id);
+        if (optionPizza.isPresent()) {
+            model.addAttribute("pizza", pizzaRepository.findById(id).get());
+            return "pizze/show";
         }
-        return "pizze/dettaglioPizza";
+        model.addAttribute("errorCause", "La pizza da te cercata con " + id + "non esiste");
+        return "pizze/error";
     }
 
     @GetMapping("/contatti")
     public String contatti() {
         return "pizze/contatti";
     }
-    
-    
+
 }
