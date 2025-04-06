@@ -36,7 +36,7 @@ public class PizzaController {
     public String index(Model model,@RequestParam(name="keyword", required= false) String findPizza) {
         List<Pizza> result;
         if(findPizza != null && !findPizza.isBlank()){
-            result = pizzaRepository.findByNomeIgnoreCase(findPizza);
+            result = pizzaRepository.findByNomeContainingIgnoreCase(findPizza);
         }else{
             result = pizzaRepository.findAll();
         }

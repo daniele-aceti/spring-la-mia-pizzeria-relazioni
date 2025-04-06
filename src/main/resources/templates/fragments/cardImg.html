@@ -1,36 +1,34 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <div th:replace="fragments/header :: head"></div>
-  </head>
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <div th:replace="fragments/header :: head"></div>
+</head>
+
 <body class="container" th:fragment="card">
-                      <div th:if="${pizzaList.isEmpty()}">
-      <p class="text-light">La lista è vuota</p>
-    </div>
+  <div th:if="${pizzaList.isEmpty()}">
+    <p class="text-light">La lista è vuota</p>
+  </div>
 
-    <div th:unless="${pizzaList.isEmpty()}">
-      <h1 class="text-danger container ms-1">SELEZIONATE PER VOI</h1>
+  <div th:unless="${pizzaList.isEmpty()}">
+    <h1 class="text-danger container ms-1">SELEZIONATE PER VOI</h1>
 
-      <div id="pizze" class="container row row-cols-2 me-5">
-        <span class="mt-5" th:each="pizza : ${pizzaList}">
-          <h2 class="text-light" th:text="${pizza.nome}"></h2>
-          <a th:href="@{|pizze/${pizza.id}|}">
-            <img th:src="${pizza.foto}" />
-          </a>
-          <span class="text-light" th:text="${pizza.descrizione}"></span>
-          <div class="text-light" th:text="${pizza.prezzo}"></div>
-        </span>
-      </div>
+    <div id="pizze" class="row row-cols-md-2 me-5">
+      <span class="mt-5" th:each="pizza : ${pizzaList}">
+        <h2 class="text-light" th:text="${pizza.nome}"></h2>
+        <a th:href="@{|pizze/${pizza.id}|}">
+          <img class="img-fluid img-thumbnail roundend" th:src="${pizza.foto}" />
+        </a>
+        <div class="text-light" th:text="${pizza.prezzo}"></div>
+      </span>
     </div>
-            </div>
-          </div> 
-        </span>
-<div th:replace="fragments/header :: bootstrapScript"></div>
+  </div>
+  </div>
+  </div>
+  </span>
+  <div th:replace="fragments/header :: bootstrapScript"></div>
 </body>
+
 </html>
-
-
-
-
