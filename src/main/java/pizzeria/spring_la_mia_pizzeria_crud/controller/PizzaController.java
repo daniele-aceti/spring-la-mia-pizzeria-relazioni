@@ -52,7 +52,7 @@ public class PizzaController {
             return "pizze/show";
         }
         model.addAttribute("errorCause", "La pizza da te cercata con id " + id + " non esiste");
-        return "pizze/error";
+        return "pizze/error/error";
     }
 
     @GetMapping("/contatti")
