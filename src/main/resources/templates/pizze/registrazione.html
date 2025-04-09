@@ -1,0 +1,66 @@
+<!-- <!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <div th:replace="fragments/header :: head"></div>
+    <link rel="stylesheet" href="/css/indexStyle.css" />
+    <title>Creazione Account</title>
+  </head>
+  <body class="container">
+    <div th:replace="fragments/navbar :: navbar"></div>
+    <div class="container">
+      <form
+        id="user-form"
+        th:object="${user}"
+        th:action="@{/createUser}"
+        method="post"
+      >
+        <div class="row">
+          <div class="col-8">
+            <div class="row">
+              <div class="col-12">
+                <label class="form-label text-light">Nome</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="nome"
+                  th:field="*{nome}"
+                  th:errorClass="is-invalid"
+                />
+              </div>
+              <div class="col-12">
+                <label class="form-label text-light">Cognome</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="cognome"
+                  th:field="*{cognome}"
+                  th:errorClass="is-invalid"
+                />
+              </div>
+              <div class="col-12">
+                <label class="form-label text-light">Data Di Nascita</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="data-di-nascita"
+                  th:field="*{dataDiNascita}"
+                  th:errorClass="is-invalid"
+                />
+              </div>
+              <div>
+                <button class="btn btn-primary mt-5" type="submit">
+                  Crea
+                </button>
+                <a class="btn btn-danger mt-5" th:href="@{/pizze}">Cancel</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+    <div th:replace="fragments/header :: bootstrapScript"></div>
+  </body>
+</html>
+ -->
