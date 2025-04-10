@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <div th:replace="fragments/header :: head"></div>
+    <link rel="stylesheet" href="/css/indexStyle.css" />
+  </head>
+<body>
+  <div th:replace="~{fragments/navbar :: navbar}"></div>
+    <form class="d-flex me-5" role="search" th:action="@{/pizze}" th:object="@{user}">
+    <input
+      name="username"
+      th:value="${username}"
+      class="form-control me-2"
+      type="text"
+      placeholder="Username"
+      aria-label="Username"
+    />
+    <input
+    name="password"
+    th:value="${password}"
+    class="form-control me-2"
+    type="password"
+    placeholder="Password"
+    aria-label="Password"
+  />
+    <button class="btn btn-danger" type="submit">Login</button>
+
+  
+  </form>
+<div th:replace="~{fragments/header :: bootstrapScript}"></div>
+</body>
+</html>

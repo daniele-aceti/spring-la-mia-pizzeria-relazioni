@@ -1,4 +1,4 @@
-<!-- <!DOCTYPE html>
+<!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
   <head>
     <meta charset="UTF-8" />
@@ -7,13 +7,13 @@
     <link rel="stylesheet" href="/css/indexStyle.css" />
     <title>Creazione Account</title>
   </head>
-  <body class="container">
+  <body>
     <div th:replace="fragments/navbar :: navbar"></div>
     <div class="container">
       <form
         id="user-form"
         th:object="${user}"
-        th:action="@{/createUser}"
+        th:action="@{/user}"
         method="post"
       >
         <div class="row">
@@ -40,15 +40,26 @@
                 />
               </div>
               <div class="col-12">
-                <label class="form-label text-light">Data Di Nascita</label>
+                <label class="form-label text-light">Username</label>
                 <input
                   type="text"
                   class="form-control"
-                  id="data-di-nascita"
-                  th:field="*{dataDiNascita}"
+                  id="username"
+                  th:field="*{username}"
                   th:errorClass="is-invalid"
                 />
               </div>
+              <div class="col-12">
+                <label class="form-label text-light">Password</label>
+                <input
+                  type="password"
+                  class="form-control"
+                  id="password"
+                  th:field="*{password}"
+                  th:errorClass="is-invalid"
+                />
+              </div>
+              <a class="text-light mt-5" th:href="@{/login}">Sei già registrato? Clicca qui</a>
               <div>
                 <button class="btn btn-primary mt-5" type="submit">
                   Crea
@@ -63,4 +74,3 @@
     <div th:replace="fragments/header :: bootstrapScript"></div>
   </body>
 </html>
- -->
