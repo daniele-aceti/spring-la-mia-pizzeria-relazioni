@@ -33,10 +33,15 @@ public class UserController {
     @PostMapping("/login")
     public String login(@RequestParam String username, @RequestParam String password, Model model) {
         Optional<User> userOptional = userRepository.findByUsernameAndPassword(username, password);
-        if(userOptional.isPresent()){
+        Optional<User> adminOptional = userRepository.findById(1);
+        if(userOptional.isPresent() && userOptional.equals(adminOptional)){
             model.addAttribute("user", userOptional.get());
-            return "pizze/indexUser";
-        }else{
+            return "pizze/indexAdmin";
+        }else if(userOptional.isPresent() && !userOptional.equals(adminOptional)){
+            model.addAttribute("user", userOptional.get());
+            return "pizze/index";
+        }
+        else{
             model.addAttribute("user", "Username o Password errati");
             return "pizze/login";
         }
