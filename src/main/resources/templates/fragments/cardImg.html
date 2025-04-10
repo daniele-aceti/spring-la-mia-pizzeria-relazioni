@@ -9,7 +9,7 @@
 
 <body class="container" th:fragment="card">
   <div th:if="${pizzaList.isEmpty()}">
-    <p class="text-light">La lista è vuota</p>
+    <p class="text-danger text-center">OOOPS! QUALCOSA E' ANDATO STORTO RIPROVA</p>
   </div>
 
   <div th:unless="${pizzaList.isEmpty()}">

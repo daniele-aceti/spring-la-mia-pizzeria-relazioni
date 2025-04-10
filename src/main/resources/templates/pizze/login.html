@@ -8,24 +8,12 @@
   </head>
 <body>
   <div th:replace="~{fragments/navbar :: navbar}"></div>
-    <form class="d-flex me-5" role="search" th:action="@{/pizze}" th:object="@{user}">
-    <input
-      name="username"
-      th:value="${username}"
-      class="form-control me-2"
-      type="text"
-      placeholder="Username"
-      aria-label="Username"
-    />
-    <input
-    name="password"
-    th:value="${password}"
-    class="form-control me-2"
-    type="password"
-    placeholder="Password"
-    aria-label="Password"
-  />
-    <button class="btn btn-danger" type="submit">Login</button>
+  <form action="/login" method="post">
+    <input type="text" name="username" placeholder="username">
+    <input type="password" name="password" placeholder="password">
+        <button class="btn btn-danger" type="submit">Login</button>
+  </form>
+
 
   
   </form>

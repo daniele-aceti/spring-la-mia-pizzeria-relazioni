@@ -4,7 +4,7 @@
     <div th:replace="fragments/header :: head"></div>
     <title>Pizzeria</title>
   </head>
-  <header th:fragment="navbar">
+  <header th:fragment="navbarAdmin">
     <nav class="navbar navbar-expand-lg bg-dark">
       <div class="container-fluid">
         <img
@@ -42,8 +42,8 @@
               >
             </li>
           </ul>
-<!--           <a class="btn btn-danger me-3" th:href="@{/create}">Aggiungi Pizza</a>
-          <a class="btn btn-danger me-3" th:href="@{/create}">Modifica Pizza</a> -->
+          <a class="btn btn-danger me-3" th:href="@{/create}">Aggiungi Pizza</a>
+          <a class="btn btn-danger me-3" th:href="@{/create}">Modifica Pizza</a>
           <form class="d-flex me-5" role="search" th:action="@{/pizze}">
             <input
               name="keyword"
