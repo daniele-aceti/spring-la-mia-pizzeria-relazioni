@@ -19,7 +19,6 @@ import jakarta.validation.Valid;
 import pizzeria.spring_la_mia_pizzeria_crud.model.Pizza;
 import pizzeria.spring_la_mia_pizzeria_crud.repository.PizzaRepository;
 
-
 @Controller
 @RequestMapping
 
@@ -39,11 +38,11 @@ public class PizzaController {
     }
 
     @GetMapping("/pizze")
-    public String index(Model model,@RequestParam(name="keyword", required= false) String findPizza) {
+    public String index(Model model, @RequestParam(name = "keyword", required = false) String findPizza) {
         List<Pizza> result;
-        if(findPizza != null && !findPizza.isBlank()){
+        if (findPizza != null && !findPizza.isBlank()) {
             result = pizzaRepository.findByNomeContainingIgnoreCase(findPizza);
-        }else{
+        } else {
             result = pizzaRepository.findAll();
         }
         model.addAttribute("pizzaList", result);
@@ -87,6 +86,27 @@ public class PizzaController {
         redirectAttributes.addFlashAttribute("successMessage", "Pizza creata!");
         return "redirect:/pizze";
     }
-    
+
+    @GetMapping("/modifica")
+    public String modifica(Model model) {
+        List<Pizza> listaPizza = pizzaRepository.findAll();
+        model.addAttribute("listaPizza", listaPizza);
+        model.addAttribute("modificaPizza", new Pizza());
+        return "pizze/modifcaPizza";
+    }
+
+    @PostMapping("/modifica/submit")
+    public String salvaModifica(@Valid @ModelAttribute("modificaPizza") Pizza pizza,
+            BindingResult bindingResult,
+            Model model) {
+        if (bindingResult.hasErrors()) {
+            List<Pizza> listaPizza = pizzaRepository.findAll();
+            model.addAttribute("listaPizza", listaPizza);
+            return "pizze/modifcaPizza";
+        }
+
+        pizzaRepository.save(pizza);
+        return "redirect:/pizze";
+    }
 
 }
