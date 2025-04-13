@@ -10,33 +10,47 @@
   <body>
     <div th:replace="fragments/navbar :: navbar"></div>
     <form
-      class="col-6 container mt-5"
       id="pizza-form"
       th:object="${modificaPizza}"
-      th:action="@{/modifica}"
+      th:action="@{|/modifica/${pizza.id}|}"
       method="post"
     >
-      <select class="form-select" aria-label="Default select example">
+      <!--       <select class="form-select" aria-label="Default select example">
         <option selected disabled>Seleziona la pizza da modificare</option>
         <th:block th:each="pizza : ${listaPizza}">
           <option th:value="${pizza.id}" th:text="${pizza.nome}"></option>
         </th:block>
-      </select>
+      </select> -->
       <div class="mt-3">
-        <input placeholder="Nome Pizza" class="form-control" type="text" th:field="*{nome}" />
+        <input
+          placeholder="Nome Pizza"
+          class="form-control"
+          type="text"
+          th:field="*{nome}"
+        />
       </div>
       <textarea
-      placeholder="Descrizione Pizza"
+        placeholder="Descrizione Pizza"
         class="form-control mt-3"
         id="descrizione"
         th:field="*{descrizione}"
       >
       </textarea>
       <div class="mt-3">
-        <input placeholder="Url Foto Pizza" class="form-control" type="text" th:field="*{foto}" />
+        <input
+          placeholder="Url Foto Pizza"
+          class="form-control"
+          type="text"
+          th:field="*{foto}"
+        />
       </div>
       <div class="mt-3">
-        <input placeholder="Prezzo Pizza" class="form-control" type="text" th:field="*{prezzo}" />
+        <input
+          placeholder="Prezzo Pizza"
+          class="form-control"
+          type="text"
+          th:field="*{prezzo}"
+        />
       </div>
       <button class="btn btn-success mt-5" type="submit">Modifica</button>
       <a class="btn btn-danger mt-5" th:href="@{/pizze}">Cancel</a>

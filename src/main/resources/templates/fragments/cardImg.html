@@ -22,6 +22,11 @@
           <img class="img-fluid img-thumbnail roundend" th:src="${pizza.foto}" />
         </a>
         <div class="text-light" th:text="${pizza.prezzo}"></div>
+        <a class="btn btn-danger me-3" th:href="@{|/modifica/${pizza.id}|}">Modifica Pizza</a>
+        <form action="#" th:action="@{|/delete/${pizza.id}|}" method="post">
+          <button id="submitButton" type="submit" class="btn btn-danger me-3 mt-2" onclick="return confirm('Vuoi eliminare questa pizza?')">Elimina Pizza
+          </button>
+        </form>
       </span>
     </div>
   </div>

@@ -6,7 +6,6 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
-import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 
@@ -31,7 +30,7 @@ public class Pizza {
     private String foto;
 
     @NotBlank(message="Inserire un valore corretto")
-    @Min(value = 5, message="Inserire un prezzo corretto")
+    //@Min(value = 5, message="Inserire un prezzo corretto")
     @Column(nullable = false)
     private String prezzo;
 
