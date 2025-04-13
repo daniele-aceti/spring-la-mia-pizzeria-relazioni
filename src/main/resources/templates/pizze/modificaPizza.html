@@ -9,46 +9,95 @@
   </head>
   <body>
     <div th:replace="fragments/navbar :: navbar"></div>
-    <form
-      id="pizza-form"
-      th:object="${modificaPizza}"
-      th:action="@{|/modifica/*{id}|}"
-      method="post"
-    >
-      <div class="mt-3">
-        <input
-          placeholder="Nome Pizza"
-          class="form-control"
-          type="text"
-          th:field="*{nome}"
-        />
-      </div>
-      <textarea
-        placeholder="Descrizione Pizza"
-        class="form-control mt-3"
-        id="descrizione"
-        th:field="*{descrizione}"
+    <div class="container">
+      <form
+        id="pizza-form"
+        th:object="${modificaPizza}"
+        th:action="@{|/modifica/*{id}|}"
+        method="post"
       >
-      </textarea>
-      <div class="mt-3">
-        <input
-          placeholder="Url Foto Pizza"
-          class="form-control"
-          type="text"
-          th:field="*{foto}"
-        />
-      </div>
-      <div class="mt-3">
-        <input
-          placeholder="Prezzo Pizza"
-          class="form-control"
-          type="text"
-          th:field="*{prezzo}"
-        />
-      </div>
-      <button class="btn btn-success mt-5" type="submit">Modifica</button>
-      <a class="btn btn-danger mt-5" th:href="@{/pizze}">Cancel</a>
-    </form>
+        <div class="row">
+          <div class="col-8">
+            <div class="row">
+              <div class="col-12">
+                <label class="form-label text-light">Nome</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="nome"
+                  th:field="*{nome}"
+                  th:errorClass="is-invalid"
+                />
+                <ul th:if="${#fields.hasErrors('nome')}">
+                  <li
+                    th:each="err : ${#fields.errors('nome')}"
+                    class="text-danger"
+                    th:text="${err}"
+                  ></li>
+                </ul>
+              </div>
+              <div class="col-12">
+                <label class="form-label text-light">Descrizione</label>
+                <textarea
+                  type="text"
+                  class="form-control"
+                  id="descrizione"
+                  th:field="*{descrizione}"
+                  th:errorClass="is-invalid"
+                ></textarea>
+                <ul th:if="${#fields.hasErrors('nome')}">
+                  <li
+                    th:each="err : ${#fields.errors('nome')}"
+                    class="text-danger"
+                    th:text="${err}"
+                  ></li>
+                </ul>
+              </div>
+              <div class="col-12">
+                <label class="form-label text-light">Foto(url)</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="foto"
+                  th:field="*{foto}"
+                  th:errorClass="is-invalid"
+                />
+                <ul th:if="${#fields.hasErrors('nome')}">
+                  <li
+                    th:each="err : ${#fields.errors('nome')}"
+                    class="text-danger"
+                    th:text="${err}"
+                  ></li>
+                </ul>
+              </div>
+              <div class="col-12">
+                <label class="form-label text-light">Prezzo</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="prezzo"
+                  th:field="*{prezzo}"
+                  th:errorClass="is-invalid"
+                />
+                <ul th:if="${#fields.hasErrors('nome')}">
+                  <li
+                    th:each="err : ${#fields.errors('nome')}"
+                    class="text-danger"
+                    th:text="${err}"
+                  ></li>
+                </ul>
+              </div>
+              <div>
+                <button class="btn btn-primary mt-5" type="submit">
+                  Invia
+                </button>
+                <a class="btn btn-danger mt-5" th:href="@{/pizze}">Cancel</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
 
     <div th:replace="fragments/header :: bootstrapScript"></div>
   </body>
