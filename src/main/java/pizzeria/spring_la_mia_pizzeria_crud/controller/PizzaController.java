@@ -19,7 +19,6 @@ import jakarta.validation.Valid;
 import pizzeria.spring_la_mia_pizzeria_crud.model.Pizza;
 import pizzeria.spring_la_mia_pizzeria_crud.repository.PizzaRepository;
 
-
 @Controller
 @RequestMapping
 
@@ -88,7 +87,6 @@ public class PizzaController {
         return "redirect:/pizze";
     }
 
-
     @GetMapping("/modifica/{id}")
     public String edit(@PathVariable("id") Integer id, Model model) {
 
@@ -97,12 +95,12 @@ public class PizzaController {
         return "/pizze/modificaPizza";
     }
 
-     @PostMapping("/modifica/{id}")
+    @PostMapping("/modifica/{id}")
     public String update(
             @Valid @ModelAttribute("modificaPizza") Pizza formPizza,
             BindingResult bindingResult,
             Model model) {
-    
+
         if (bindingResult.hasErrors()) {
             return "/pizze/modificaPizza";
         }
@@ -111,15 +109,12 @@ public class PizzaController {
         return "redirect:/pizze";
     }
 
-
-
     @PostMapping("/delete/{id}")
     public String delete(@PathVariable("id") Integer id) {
         Pizza pizza = pizzaRepository.findById(id).get();
         pizzaRepository.deleteById(id);
-        
+
         return "redirect:/pizze";
     }
-    
 
 }
