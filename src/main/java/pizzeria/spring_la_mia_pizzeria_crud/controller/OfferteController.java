@@ -37,10 +37,10 @@ public class OfferteController {
 
         repository.save(formOfferte);
 
-        return "redirect:/pizze/show/" + formOfferte.getPizza().getId();
+        return "redirect:/pizze/" + formOfferte.getPizza().getId();
     }
 
-    @GetMapping("/edit/{id}")
+    @GetMapping("/{id}/edit")
     public String edit(@PathVariable Long id, Model model) {
         OfferteSpeciali offerte = repository.findById(id).get();
         model.addAttribute("offerte", offerte);
@@ -48,7 +48,7 @@ public class OfferteController {
         return "/offerte/edit";
     }
 
-    @PostMapping("/edit/{id}")
+    @PostMapping("/{id}/edit")
     public String doEdit(@Valid @ModelAttribute("offerte") OfferteSpeciali offerte,
             BindingResult bindingResult, Model model) {
 

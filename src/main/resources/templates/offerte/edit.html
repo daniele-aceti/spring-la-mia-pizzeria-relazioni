@@ -11,14 +11,14 @@
     <div th:replace="fragments/navbar :: navbar"></div>
     <div class="container">
       <h1>
-        Modifca l'offerta per <span th:text="${offerte.pizza.title}"></span>
+        Modifca l'offerta
       </h1>
       <form
         id="offerta-form"
         th:object="${offerte}"
-        th:action="@{offerte/create}"
+        th:action="${editMode} ? @{|/offerte/${offerte.id}/edit|} : @{/offerte/create}" 
         method="post"
-      ><!-- OPERATORE TERNARIO -->
+      >
         <input type="hidden" th:field="*{pizza}" id="pizza" />
         <div class="row">
           <div class="col-12">
@@ -31,12 +31,12 @@
               th:errorClass="is-invalid"
             />
             <div
-              th:if="${#fields.hasErrors('offerteData')}"
+              th:if="${#fields.hasErrors('dataInizio')}"
               class="invalid-feedback"
             >
               <ul>
                 <li
-                  th:each="err : ${#fields.errors('offerteData')}"
+                  th:each="err : ${#fields.errors('dataInizio')}"
                   th:text="${err}"
                 ></li>
               </ul>
@@ -97,7 +97,7 @@
             </button>
             <a
               class="btn btn-danger"
-              th:href="@{|/pizze/show/${offerte.pizza.id}|}"
+              th:href="@{|/pizze/${offerte.pizza.id}|}"
             >
               Cancel</a
             >

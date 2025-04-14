@@ -26,9 +26,9 @@
               <a class="btn btn-success"th:href="@{|/${pizza.id}/offerte|}">
                 Nuova Offerta
               </a>
- <!--              <a class="btn btn-danger" th:href="@{|/offerte/edit/${offerte.id}|}">
+            <a class="btn btn-danger" th:href="@{|/${pizza.id}/edit|}">
                 Modifica
-            </a> -->
+            </a> 
             </div>
             <table class="table-stripped" th:if="${pizza.offerteSpeciali.size() > 0}">
               <thead>

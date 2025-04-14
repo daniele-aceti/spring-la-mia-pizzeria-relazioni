@@ -9,6 +9,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 
 @Entity
 public class OfferteSpeciali {
@@ -17,11 +18,11 @@ public class OfferteSpeciali {
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     private Long id;
 
-    @NotBlank
+    @NotNull
     private LocalDate dataInizio;
 
 
-    @NotBlank
+    @NotNull
     private LocalDate dataFine;
 
     @NotBlank
