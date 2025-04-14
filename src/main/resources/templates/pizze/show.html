@@ -1,66 +1,77 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <div th:replace="fragments/header :: head"></div>
-    <link rel="stylesheet" href="/css/indexStyle.css" />
-  </head>
-  <body>
-    <div th:replace="fragments/navbar :: navbar"></div>
-    <h1 class="text-danger">ECCO LA PIZZA CHE CERCAVI</h1>
-    <main class="container">
-      <div th:object="${pizza}">
-        <div class="d-flex justify-content-center">
-          <img class="img-fluid mt-5" th:src="*{foto}" />
-        </div>
-        <h2 class="text-light text-center" th:text="*{nome}"></h2>
-        <p class="text-danger text-center">Descrizione:</p>
-        <p class="text-danger text-center" th:text="*{descrizione}"></p>
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <div th:replace="fragments/header :: head"></div>
+  <link rel="stylesheet" href="/css/indexStyle.css" />
+</head>
+
+<body>
+  <div th:replace="fragments/navbar :: navbar"></div>
+  <h1 class="text-danger">ECCO LA PIZZA CHE CERCAVI</h1>
+  <main class="container">
+    <div th:object="${pizza}">
+      <div class="d-flex justify-content-center">
+        <img class="img-fluid mt-5" th:src="*{foto}" />
       </div>
-      <div>
-        <div class="row">
-          <div class="col-12">
-            <h3>Offerte Speciali</h3>
-            <div class="mb-2">
-              <a class="btn btn-success"th:href="@{|/${pizza.id}/offerte|}">
-                Nuova Offerta
-              </a>
-            </div>
-            <table class="table-striped" th:if="${pizza.offerteSpeciali.size() > 0}">
-              <thead class="text-danger">
-                <tr>
-                  <th>
-                    Data Inzio
-                  </th>
-                  <th class="ps-3">
-                    Data Fine
-                  </th>
-                  <th class="ps-3">
-                    Titolo
-                  </th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr class="text-light" th:each="offerte : ${pizza.offerteSpeciali}">
-                  <td  th:text:"${offerte.dataInzio}"></td>
-                  <td class="ps-3"  th:text="${offerte.dataFine}"></td>
-                  <td class="ps-3" th:text="${offerte.titolo}"></td>
-                  <td class="ps-3"><a class="btn btn-danger" th:href="@{|/offerte/${offerte.id}/edit|}">
+      <h2 class="text-light text-center" th:text="*{nome}"></h2>
+      <p class="text-danger text-center">Descrizione:</p>
+      <p class="text-danger text-center" th:text="*{descrizione}"></p>
+    </div>
+    <div>
+      <div class="row">
+        <div class="col-12">
+          <h3>Offerte Speciali</h3>
+          <div class="mb-2">
+            <a class="btn btn-success" th:href="@{|/${pizza.id}/offerte|}">
+              Nuova Offerta
+            </a>
+          </div>
+          <table class="table-striped" th:if="${pizza.offerteSpeciali.size() > 0}">
+            <thead class="text-danger">
+              <tr>
+                <th>
+                  Data Inzio
+                </th>
+                <th class="ps-3">
+                  Data Fine
+                </th>
+                <th class="ps-3">
+                  Titolo
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="text-light" th:each="offerte : ${pizza.offerteSpeciali}">
+                <td  th:text="${offerte.dataInizio}"></td>
+                <td class="ps-3" th:text="${offerte.dataFine}"></td>
+                <td class="ps-3" th:text="${offerte.titolo}"></td>
+                <td class="ps-3"><a class="btn btn-dark" th:href="@{|/offerte/${offerte.id}/edit|}">
                     Modifica
-                </a> </td>
-                </tr>
-              </tbody>
-            </table>
-            <div th:unless="${pizza.offerteSpeciali.size() > 0}">
-              <div class="alert alert-primary">
-                Non ci sono offerte
-              </div>
+                  </a> </td>
+                <form action="#" th:action="@{|/offerte/${offerte.id}/delete|}" method="post">
+                  <td class="ps-3">
+                  
+                      <button class="btn btn-danger" type="submit" onclick="return confirm('Vuoi eliminare questa offerta?')">
+                     Elimina</button>
+                  </td>
+                </form>
+
+              </tr>
+            </tbody>
+          </table>
+          <div th:unless="${pizza.offerteSpeciali.size() > 0}">
+            <div class="alert alert-primary">
+              Non ci sono offerte
             </div>
           </div>
         </div>
       </div>
-    </main>
-    <div th:replace="fragments/header :: bootstrapScript"></div>
-  </body>
+    </div>
+  </main>
+  <div th:replace="fragments/header :: bootstrapScript"></div>
+</body>
+
 </html>

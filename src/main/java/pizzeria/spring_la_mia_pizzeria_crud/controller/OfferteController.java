@@ -14,6 +14,7 @@ import jakarta.validation.Valid;
 import pizzeria.spring_la_mia_pizzeria_crud.model.OfferteSpeciali;
 import pizzeria.spring_la_mia_pizzeria_crud.repository.OfferteRepository;
 
+
 @Controller
 @RequestMapping("/offerte")
 public class OfferteController {
@@ -57,11 +58,20 @@ public class OfferteController {
             model.addAttribute("offerte", offerte);
             return "/offerte/edit";
         }
-
-
+        
 
         repository.save(offerte);
 
         return "redirect:/pizze/" + offerte.getPizza().getId();
     }
+
+    @PostMapping("/{id}/delete")
+    public String delete(@PathVariable Long id ) {
+        OfferteSpeciali offerte = repository.findById(id).get();
+        repository.deleteById(id);
+        
+        
+        return "redirect:/pizze/" + offerte.getPizza().getId();
+    }
+    
 }
