@@ -18,6 +18,48 @@
         <p class="text-danger text-center">Descrizione:</p>
         <p class="text-danger text-center" th:text="*{descrizione}"></p>
       </div>
+      <div>
+        <div class="row">
+          <div class="col-12">
+            <h3>Offerte Speciali</h3>
+            <div class="mb-2">
+              <a class="btn btn-success"th:href="@{|/${pizza.id}/offerte|}">
+                Nuova Offerta
+              </a>
+ <!--              <a class="btn btn-danger" th:href="@{|/offerte/edit/${offerte.id}|}">
+                Modifica
+            </a> -->
+            </div>
+            <table class="table-stripped" th:if="${pizza.offerteSpeciali.size() > 0}">
+              <thead>
+                <tr>
+                  <th>
+                    Data Inzio
+                  </th>
+                  <th>
+                    Data Fine
+                  </th>
+                  <th>
+                    Titolo
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr th:each="offerte : ${pizza.offerteSpeciali}">
+                  <td th:text:"${offerte.dataInzio}"></td>
+                  <td th:text="${offerte.dataFine}"></td>
+                  <td the:text="${offerte.titolo}"></td>
+                </tr>
+              </tbody>
+            </table>
+            <div th:unless="${pizza.offerteSpeciali.size() > 0}">
+              <div class="alert alert-primary">
+                Non ci sono offerte
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </main>
     <div th:replace="fragments/header :: bootstrapScript"></div>
   </body>

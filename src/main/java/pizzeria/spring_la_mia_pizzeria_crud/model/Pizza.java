@@ -1,10 +1,13 @@
 package pizzeria.spring_la_mia_pizzeria_crud.model;
 
+import java.util.List;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
@@ -30,9 +33,13 @@ public class Pizza {
     private String foto;
 
     @NotBlank(message="Inserire un valore corretto")
-    //@Min(value = 5, message="Inserire un prezzo corretto")
     @Column(nullable = false)
     private String prezzo;
+
+
+    @OneToMany(mappedBy="pizza")//questo nome pizza è lo stesso di ManyToOne di OfferteSpeciali Pizza pizza
+    private List<OfferteSpeciali> offerteSpeciali;
+
 
     public Integer getId() {
         return id;
@@ -72,5 +79,13 @@ public class Pizza {
 
     public void setPrezzo(String prezzo) {
         this.prezzo = prezzo;
+    }
+
+    public List<OfferteSpeciali> getOfferteSpeciali() {
+        return offerteSpeciali;
+    }
+
+    public void setOfferteSpeciali(List<OfferteSpeciali> offerteSpeciali) {
+        this.offerteSpeciali = offerteSpeciali;
     }
 }

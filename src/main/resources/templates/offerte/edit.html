@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <title>Modifica</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <div th:replace="fragments/header :: head"></div>
+    <link rel="stylesheet" href="/css/indexStyle.css" />
+  </head>
+  <body>
+    <div th:replace="fragments/navbar :: navbar"></div>
+    <div class="container">
+      <h1>
+        Modifca l'offerta per <span th:text="${offerte.pizza.title}"></span>
+      </h1>
+      <form
+        id="offerta-form"
+        th:object="${offerte}"
+        th:action="@{offerte/create}"
+        method="post"
+      ><!-- OPERATORE TERNARIO -->
+        <input type="hidden" th:field="*{pizza}" id="pizza" />
+        <div class="row">
+          <div class="col-12">
+            <label class="form-label" for="dataInizio">Data di Inizio</label>
+            <input
+              type="date"
+              class="form-control"
+              id="dataInizio"
+              th:field="*{dataInizio}"
+              th:errorClass="is-invalid"
+            />
+            <div
+              th:if="${#fields.hasErrors('offerteData')}"
+              class="invalid-feedback"
+            >
+              <ul>
+                <li
+                  th:each="err : ${#fields.errors('offerteData')}"
+                  th:text="${err}"
+                ></li>
+              </ul>
+            </div>
+          </div>
+          <div class="col-12">
+            <label class="form-label" for="dataFine">Data Fine</label>
+            <input
+              type="date"
+              class="form-control"
+              id="dataFine"
+              th:field="*{dataFine}"
+              th:errorClass="is-invalid"
+            />
+            <div
+              th:if="${#fields.hasErrors('dataFine')}"
+              class="invalid-feedback"
+            >
+              <ul>
+                <li
+                  th:each="err : ${#fields.errors('dataFine')}"
+                  th:text="${err}"
+                ></li>
+              </ul>
+            </div>
+          </div>
+          <div class="col-12">
+            <label class="form-label" for="titolo">Titolo</label>
+            <input
+              type="text"
+              class="form-control"
+              id="titolo"
+              th:field="*{titolo}"
+              th:errorClass="is-invalid"
+            />
+            <div th:if="${#fields.hasErrors('titolo')}" class="invalid-feedback">
+              <ul>
+                <li
+                  th:each="err : ${#fields.errors('titolo')}"
+                  th:text="${err}"
+                ></li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- Custom error -->
+          <ul>
+            <li
+              th:each="err : ${#fields.allErrors()}"
+              th:text="${err}"
+              class="text-danger"
+            ></li>
+          </ul>
+
+          <div class="col-12">
+            <button class="btn btn-primary" type="submit">
+              Save
+            </button>
+            <a
+              class="btn btn-danger"
+              th:href="@{|/pizze/show/${offerte.pizza.id}|}"
+            >
+              Cancel</a
+            >
+          </div>
+        </div>
+      </form>
+    </div>
+
+    <div th:replace="fragments/header :: bootstrapScript"></div>
+  </body>
+</html>
