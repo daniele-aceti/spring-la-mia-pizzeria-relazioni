@@ -41,7 +41,7 @@ public class OfferteController {
     }
 
     @GetMapping("/{id}/edit")
-    public String edit(@PathVariable Long id, Model model) {
+    public String edit(@PathVariable ("id") Long id , Model model) {
         OfferteSpeciali offerte = repository.findById(id).get();
         model.addAttribute("offerte", offerte);
         model.addAttribute("editMode", true);
@@ -62,6 +62,6 @@ public class OfferteController {
 
         repository.save(offerte);
 
-        return "redirect:/books/show/" + offerte.getPizza().getId();
+        return "redirect:/pizze/" + offerte.getPizza().getId();
     }
 }
