@@ -135,6 +135,7 @@ public class PizzaController {
         Pizza newPizza = new Pizza();
         model.addAttribute("newPizza", newPizza);
         model.addAttribute("pizza", pizza);
+
         return "pizze/adminModifica";
     }
 
