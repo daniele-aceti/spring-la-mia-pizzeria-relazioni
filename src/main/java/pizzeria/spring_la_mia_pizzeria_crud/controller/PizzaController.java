@@ -127,6 +127,30 @@ public class PizzaController {
         model.addAttribute("editMode", false);
         return "offerte/edit";
     }
-    
+
+
+    @GetMapping("/modificaAdmin")
+    public String editAdmin(Model model) {
+        List <Pizza> pizza = pizzaRepository.findAll();
+        Pizza newPizza = new Pizza();
+        model.addAttribute("newPizza", newPizza);
+        model.addAttribute("pizza", pizza);
+        return "pizze/adminModifica";
+    }
+
+    @PostMapping("/modificaAdmin")
+    public String updateAdmmin(
+            @Valid @ModelAttribute("modificaPizza") Pizza formPizza,
+            BindingResult bindingResult,
+            Model model) {
+
+        if (bindingResult.hasErrors()) {
+            return "/pizze/adminModifica";
+        }
+        pizzaRepository.save(formPizza);
+
+        return "redirect:/pizze";
+    }
+     
 
 }
