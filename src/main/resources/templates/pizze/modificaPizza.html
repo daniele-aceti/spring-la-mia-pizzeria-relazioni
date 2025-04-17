@@ -88,7 +88,7 @@
                 </ul>
               </div>
               <div class="form-check" th:each="item : ${listaIngredienti}">
-                <input type="checkbox" th:value="${item.id}" th:field="*{id}" />
+                <input type="checkbox" th:value="${item.id}" th:field="*{ingredienti}" />
                 <label
                   class="form-check-label text-light"
                   th:text="${item.ingredienti}"

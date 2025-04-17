@@ -90,7 +90,7 @@ public class PizzaController {
 
         pizzaRepository.save(formPizza);
 
-        redirectAttributes.addFlashAttribute("successMessage", "Pizza creata!");
+        //redirectAttributes.addFlashAttribute("successMessage", "Pizza creata!");
         return "redirect:/pizze";
     }
 

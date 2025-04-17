@@ -20,7 +20,7 @@
       <p class="text-danger text-center">Descrizione:</p>
       <p class="text-danger text-center" th:text="*{descrizione}"></p>
       <ul>
-        <li th:each="item : *{ingredienti}" th:text="${item.ingredienti}"></li>
+        <li class="text-warning" th:each="item : *{ingredienti}" th:text="${item.ingredienti}"></li>
       </ul>
     </div>
     <div>
