@@ -9,13 +9,13 @@
   
   <body  class="img-fluid">
     <header>
-      <div th:replace="fragments/navbar :: navbar"></div>
+      <div th:replace="~{fragments/navbar :: navbar}"></div>
     </header>
     <main th:replace="fragments/cardImg :: card">
     </main>
     <footer>
       <div th:replace="fragments/footer :: footer"></div>
     </footer>
-    <div th:replace="fragments/header :: bootstrapScript"></div>
+    <div th:replace="~{fragments/header :: bootstrapScript}"></div>
   </body>
 </html>

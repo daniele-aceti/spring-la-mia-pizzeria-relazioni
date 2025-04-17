@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="/css/indexStyle.css" />
   </head>
   <body>
-    <div th:replace="fragments/navbar :: navbar"></div>
+    <div th:replace="~{fragments/navbar :: navbar}"></div>
     <div class="container">
       <form
         id="pizza-form"
@@ -102,6 +102,6 @@
         idInput.value = select.value;
       }
     </script>
-    <div th:replace="fragments/header :: bootstrapScript"></div>
+    <div th:replace="~{fragments/header :: bootstrapScript}"></div>
   </body>
 </html>

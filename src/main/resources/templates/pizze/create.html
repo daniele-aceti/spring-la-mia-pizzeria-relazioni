@@ -8,7 +8,7 @@
     <title>Creazione Nuova Pizza</title>
   </head>
   <body>
-    <div th:replace="fragments/navbar :: navbar"></div>
+    <div th:replace="~{fragments/navbar :: navbar}"></div>
     <div class="container">
       <form
         id="pizza-form"
@@ -89,6 +89,6 @@
         </div>
       </form>
     </div>
-    <div th:replace="fragments/header :: bootstrapScript"></div>
+    <div th:replace="~{fragments/header :: bootstrapScript}"></div>
   </body>
 </html>
