@@ -19,9 +19,8 @@
       <h2 class="text-light text-center" th:text="*{nome}"></h2>
       <p class="text-danger text-center">Descrizione:</p>
       <p class="text-danger text-center" th:text="*{descrizione}"></p>
-      <ul>
-        <li class="text-warning" th:each="item : *{ingredienti}" th:text="${item.ingredienti}"></li>
-      </ul>
+      <h3 class="text-center text-success">Ingredienti:</h3>
+      <p class="text-danger text-center" th:each="item : *{ingredienti}" th:text="${item.ingredienti}"></p>
     </div>
     <div>
       <div class="row">

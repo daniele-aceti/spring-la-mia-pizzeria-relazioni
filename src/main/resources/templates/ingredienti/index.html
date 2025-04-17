@@ -30,7 +30,7 @@
         <ul class="list-group" th:if="${listaIngredienti.size() > 0}">
             <li class="list-group-item d-flex justify-content-between" th:each="item : ${listaIngredienti}">
                  <span th:text="${item.ingredienti}"></span>
-                 <form th:action="@{|/categories/delete/${item.id}|}" method="post" >
+                 <form th:action="@{|/ingredienti/delete/${item.id}|}" method="post" >
                     <button class="btn btn-danger" type="submit"
                             id="submitButton" onclick="return confirm('Are you sure?')">
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash3" viewBox="0 0 16 16">
