@@ -7,6 +7,9 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
@@ -18,7 +21,7 @@ public class Pizza {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private Long id;
 
     @NotBlank(message="Inserire un valore corretto")
     @Column(length = 50, nullable = false)
@@ -40,12 +43,30 @@ public class Pizza {
     @OneToMany(mappedBy="pizza")//questo nome pizza è lo stesso di ManyToOne di OfferteSpeciali Pizza pizza
     private List<OfferteSpeciali> offerteSpeciali;
 
+    @ManyToMany()
+    @JoinTable(
+        name = "pizza_ingredienti",
+        joinColumns = @JoinColumn(name = "pizza_id"),
+        inverseJoinColumns = @JoinColumn(name = "ingredienti_id")
+    )
+    private List<Ingredienti> ingredienti;//questo nome è quello del mapping
 
-    public Integer getId() {
+
+    public List<Ingredienti> getIngredienti() {
+        return ingredienti;
+    }
+
+    public void setIngredienti(List<Ingredienti> ingredienti) {
+        this.ingredienti = ingredienti;
+    }
+
+    
+
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

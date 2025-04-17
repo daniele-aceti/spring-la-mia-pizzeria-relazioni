@@ -87,6 +87,20 @@
                   ></li>
                 </ul>
               </div>
+              <div class="form-check" th:each="item : ${listaIngredienti}">
+                <input type="checkbox" th:value="${item.id}" th:field="*{id}" />
+                <label
+                  class="form-check-label text-light"
+                  th:text="${item.ingredienti}"
+                ></label>
+                <ul th:if="${#fields.hasErrors('nome')}">
+                  <li
+                    th:each="err : ${#fields.errors('nome')}"
+                    class="text-danger"
+                    th:text="${err}"
+                  ></li>
+                </ul>
+              </div>
               <div>
                 <button class="btn btn-primary mt-5" type="submit">
                   Invia

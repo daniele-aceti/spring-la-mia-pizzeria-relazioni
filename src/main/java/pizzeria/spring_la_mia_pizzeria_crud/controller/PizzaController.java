@@ -18,6 +18,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import jakarta.validation.Valid;
 import pizzeria.spring_la_mia_pizzeria_crud.model.OfferteSpeciali;
 import pizzeria.spring_la_mia_pizzeria_crud.model.Pizza;
+import pizzeria.spring_la_mia_pizzeria_crud.repository.IngredientiRepository;
 import pizzeria.spring_la_mia_pizzeria_crud.repository.PizzaRepository;
 
 @Controller
@@ -27,6 +28,9 @@ public class PizzaController {
 
     @Autowired
     private PizzaRepository pizzaRepository;
+
+    @Autowired
+    private IngredientiRepository ingredientiRepository;
 
     @GetMapping
     public String primaPagina(Model model) {
@@ -69,6 +73,7 @@ public class PizzaController {
     @GetMapping("/create")
     public String create(Model model) {
         model.addAttribute("pizza", new Pizza());
+        model.addAttribute("listaIngredienti", ingredientiRepository.findAll());
         return "pizze/create";
     }
 
@@ -79,6 +84,7 @@ public class PizzaController {
             RedirectAttributes redirectAttributes) {
 
         if (bindingResult.hasErrors()) {
+            model.addAttribute("listaIngredienti", ingredientiRepository.findAll());
             return "pizze/create";
         }
 
@@ -92,6 +98,7 @@ public class PizzaController {
     public String edit(@PathVariable("id") Integer id, Model model) {
 
         model.addAttribute("modificaPizza", pizzaRepository.findById(id).get());
+        model.addAttribute("listaIngredienti", ingredientiRepository.findAll());
 
         return "/pizze/modificaPizza";
     }

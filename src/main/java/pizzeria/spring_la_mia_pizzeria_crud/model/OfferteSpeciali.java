@@ -32,6 +32,8 @@ public class OfferteSpeciali {
     @JoinColumn(name="pizza_id", nullable=false)
     private Pizza pizza;
 
+    
+
     public Long getId() {
         return id;
     }
