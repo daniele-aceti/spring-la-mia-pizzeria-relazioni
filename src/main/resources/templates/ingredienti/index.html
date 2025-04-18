@@ -8,12 +8,14 @@
   </head>
 <body>
   <div th:replace="fragments/navbar :: navbar"></div>
-  <h1 class="text-danger">I NOSTRI INGREDIENTI</h1>
-  <div class="row">
-    <div class="col-4">
-        <form id="category-form" th:object="${creaIngredienti}" th:action="@{/ingredienti/create}" method="post">
-            <div class="input-group mb-3">
-                <input id="category" th:field="*{ingredienti}" type="text" class="form-control">
+  <h1 class="text-danger text-center">I NOSTRI INGREDIENTI</h1>
+
+  <div class="row justify-content-center">
+    <div class="col-10 col-md-6">
+  
+      <form id="category-form" th:object="${creaIngredienti}" th:action="@{/ingredienti/create}" method="post">
+        <div class="input-group mb-3">
+          <input id="category" th:field="*{ingredienti}" type="text" class="form-control">
                 <button class="btn btn-success" type="submit">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus" viewBox="0 0 16 16">
                         <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4"/>
@@ -46,9 +48,8 @@
             There are no categories in database
         </div>
     </div>
-
 </div>
-</div>
+<div th:replace="~{fragments/footer :: footer}"></div>
 <div th:replace="fragments/header :: bootstrapScript"></div>
 </body>
 </html>

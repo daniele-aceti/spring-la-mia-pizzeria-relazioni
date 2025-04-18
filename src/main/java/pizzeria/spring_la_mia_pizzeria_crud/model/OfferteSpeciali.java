@@ -2,6 +2,8 @@ package pizzeria.spring_la_mia_pizzeria_crud.model;
 
 import java.time.LocalDate;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -19,10 +21,12 @@ public class OfferteSpeciali {
     private Long id;
 
     @NotNull
+    @DateTimeFormat(pattern="yyy-MM-dd")
     private LocalDate dataInizio;
 
 
     @NotNull
+    @DateTimeFormat(pattern="yyy-MM-dd")
     private LocalDate dataFine;
 
     @NotBlank
@@ -33,7 +37,6 @@ public class OfferteSpeciali {
     private Pizza pizza;
 
     
-
     public Long getId() {
         return id;
     }

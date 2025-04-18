@@ -69,8 +69,6 @@ public class OfferteController {
     public String delete(@PathVariable Long id ) {
         OfferteSpeciali offerte = repository.findById(id).get();
         repository.deleteById(id);
-        
-        
         return "redirect:/pizze/" + offerte.getPizza().getId();
     }
     

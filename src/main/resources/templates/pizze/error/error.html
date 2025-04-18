@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="/css/error.css">
+    <link rel="stylesheet" href="/css/error.css" />
     <div th:replace="fragments/header :: head"></div>
     <script src="https://cdn.jsdelivr.net/npm/phaser@3.85.2/dist/phaser-arcade-physics.min.js"></script>
     <link rel="stylesheet" href="/css/indexStyle.css" />
@@ -11,13 +11,10 @@
   <body>
     <div th:replace="fragments/navbar :: navbar"></div>
     <main class="container">
-<!--       <div class="d-flex justify-content-center">
-        <img class="img-fluid mt-5" src="/img/error.png" alt="loading" />
-      </div> -->
       <h2 class="text-danger text-center">ERRORE</h2>
       <p class="text-danger text-center" th:text="${errorCause}"></p>
     </main>
     <div th:replace="fragments/header :: bootstrapScript"></div>
-    <script src="/js/game.js" ></script>
+    <script src="/js/game.js"></script>
   </body>
 </html>

@@ -30,10 +30,10 @@
                   <option selected disabled>
                     Seleziona la pizza da modificare
                   </option>
-                  <th:block th:each="pizza : ${pizza}">
+                  <th:block th:each="item : ${pizza}">
                     <option
-                      th:value="${pizza.id}"
-                      th:text="${pizza.nome}"
+                      th:value="${item.id}"
+                      th:text="${item.nome}"
                     ></option>
                   </th:block>
                 </select>
@@ -102,6 +102,7 @@
         idInput.value = select.value;
       }
     </script>
+    <div th:replace="~{fragments/footer :: footer}"></div>
     <div th:replace="~{fragments/header :: bootstrapScript}"></div>
   </body>
 </html>

@@ -1,23 +1,21 @@
-body{
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+body {
     background-image: url('/img/sfondo_index.jpg');
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
-    height: 100vh;
-    margin: 0;
-
+    background-attachment: fixed;/* rimane fermo lo sfondo e scrolla la pagina */
 }
 
-img{
+img {
     max-width: 30%;
     max-height: 200px;
     display: flex;
 }
 
-h1{
-    text-align: center;
-}
 
-#pizze{
-   margin-left: 10%;
-}

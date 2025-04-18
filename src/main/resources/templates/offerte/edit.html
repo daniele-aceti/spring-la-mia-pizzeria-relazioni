@@ -10,7 +10,7 @@
   <body>
     <div th:replace="fragments/navbar :: navbar"></div>
     <div class="container">
-      <h1>
+      <h1 class="text-danger text-center">
         Modifca l'offerta
       </h1>
       <form
@@ -22,7 +22,7 @@
         <input type="hidden" th:field="*{pizza}" id="pizza" />
         <div class="row">
           <div class="col-12">
-            <label class="form-label" for="dataInizio">Data di Inizio</label>
+            <label class="form-label text-light" for="dataInizio">Data di Inizio</label>
             <input
               type="date"
               class="form-control"
@@ -43,7 +43,7 @@
             </div>
           </div>
           <div class="col-12">
-            <label class="form-label" for="dataFine">Data Fine</label>
+            <label class="form-label text-light" for="dataFine">Data Fine</label>
             <input
               type="date"
               class="form-control"
@@ -64,7 +64,7 @@
             </div>
           </div>
           <div class="col-12">
-            <label class="form-label" for="titolo">Titolo</label>
+            <label class="form-label text-light" for="titolo">Titolo</label>
             <input
               type="text"
               class="form-control"
@@ -105,7 +105,7 @@
         </div>
       </form>
     </div>
-
+    <div th:replace="~{fragments/footer :: footer}"></div>
     <div th:replace="fragments/header :: bootstrapScript"></div>
   </body>
 </html>

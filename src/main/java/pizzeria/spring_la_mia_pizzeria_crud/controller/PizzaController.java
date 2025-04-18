@@ -19,6 +19,7 @@ import jakarta.validation.Valid;
 import pizzeria.spring_la_mia_pizzeria_crud.model.OfferteSpeciali;
 import pizzeria.spring_la_mia_pizzeria_crud.model.Pizza;
 import pizzeria.spring_la_mia_pizzeria_crud.repository.IngredientiRepository;
+import pizzeria.spring_la_mia_pizzeria_crud.repository.OfferteRepository;
 import pizzeria.spring_la_mia_pizzeria_crud.repository.PizzaRepository;
 
 @Controller
@@ -26,11 +27,17 @@ import pizzeria.spring_la_mia_pizzeria_crud.repository.PizzaRepository;
 
 public class PizzaController {
 
+    private final OfferteRepository offerteRepository;
+
     @Autowired
     private PizzaRepository pizzaRepository;
 
     @Autowired
     private IngredientiRepository ingredientiRepository;
+
+    PizzaController(OfferteRepository offerteRepository) {
+        this.offerteRepository = offerteRepository;
+    }
 
     @GetMapping
     public String primaPagina(Model model) {
@@ -120,6 +127,9 @@ public class PizzaController {
     @PostMapping("/delete/{id}")
     public String delete(@PathVariable("id") Integer id) {
         Pizza pizza = pizzaRepository.findById(id).get();
+        for(OfferteSpeciali of : pizza.getOfferteSpeciali()){
+            offerteRepository.delete(of);
+        }
         pizzaRepository.deleteById(id);
 
         return "redirect:/pizze";
