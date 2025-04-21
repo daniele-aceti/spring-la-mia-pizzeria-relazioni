@@ -6,8 +6,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import pizzeria.spring_la_mia_pizzeria_crud.model.Pizza;
 
-public interface PizzaRepository extends JpaRepository<Pizza, Long> {
+public interface QuantitaPizzeRepository extends JpaRepository<Pizza, Long> {
 
-    List<Pizza> findByNomeContainingIgnoreCase(String findPizza);
-    
+    List<Pizza> findByQuantitaPizza(Integer quantitaPizza);
 }

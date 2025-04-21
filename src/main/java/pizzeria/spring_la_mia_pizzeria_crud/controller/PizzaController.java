@@ -21,6 +21,8 @@ import pizzeria.spring_la_mia_pizzeria_crud.model.Pizza;
 import pizzeria.spring_la_mia_pizzeria_crud.repository.IngredientiRepository;
 import pizzeria.spring_la_mia_pizzeria_crud.repository.OfferteRepository;
 import pizzeria.spring_la_mia_pizzeria_crud.repository.PizzaRepository;
+import pizzeria.spring_la_mia_pizzeria_crud.repository.QuantitaPizzeRepository;
+
 
 @Controller
 @RequestMapping
@@ -34,6 +36,9 @@ public class PizzaController {
 
     @Autowired
     private IngredientiRepository ingredientiRepository;
+
+    @Autowired
+    private QuantitaPizzeRepository quantitaPizzeRepository;
 
     PizzaController(OfferteRepository offerteRepository) {
         this.offerteRepository = offerteRepository;
@@ -62,7 +67,7 @@ public class PizzaController {
     }
 
     @GetMapping("pizze/{id}")
-    public String show(@PathVariable("id") Integer id, Model model) {
+    public String show(@PathVariable("id") Long id, Model model) {
         Optional<Pizza> optionPizza = pizzaRepository.findById(id);
         if (optionPizza.isPresent()) {
             model.addAttribute("pizza", pizzaRepository.findById(id).get());
@@ -102,7 +107,7 @@ public class PizzaController {
     }
 
     @GetMapping("/modifica/{id}")
-    public String edit(@PathVariable("id") Integer id, Model model) {
+    public String edit(@PathVariable("id") Long id, Model model) {
 
         model.addAttribute("modificaPizza", pizzaRepository.findById(id).get());
         model.addAttribute("listaIngredienti", ingredientiRepository.findAll());
@@ -125,9 +130,9 @@ public class PizzaController {
     }
 
     @PostMapping("/delete/{id}")
-    public String delete(@PathVariable("id") Integer id) {
+    public String delete(@PathVariable("id") Long id) {
         Pizza pizza = pizzaRepository.findById(id).get();
-        for(OfferteSpeciali of : pizza.getOfferteSpeciali()){
+        for (OfferteSpeciali of : pizza.getOfferteSpeciali()) {
             offerteRepository.delete(of);
         }
         pizzaRepository.deleteById(id);
@@ -135,9 +140,8 @@ public class PizzaController {
         return "redirect:/pizze";
     }
 
-
     @GetMapping("/{id}/offerte")
-    public String editOfferte(@PathVariable Integer id, Model model) {
+    public String editOfferte(@PathVariable Long id, Model model) {
         OfferteSpeciali offerteSpeciali = new OfferteSpeciali();
         offerteSpeciali.setPizza(pizzaRepository.findById(id).get());
         model.addAttribute("offerte", offerteSpeciali);
@@ -145,10 +149,9 @@ public class PizzaController {
         return "offerte/edit";
     }
 
-
     @GetMapping("/modificaAdmin")
     public String editAdmin(Model model) {
-        List <Pizza> pizza = pizzaRepository.findAll();
+        List<Pizza> pizza = pizzaRepository.findAll();
         Pizza newPizza = new Pizza();
         model.addAttribute("newPizza", newPizza);
         model.addAttribute("pizza", pizza);
@@ -169,6 +172,9 @@ public class PizzaController {
 
         return "redirect:/pizze";
     }
-     
+
+
+    
+
 
 }

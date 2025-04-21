@@ -54,6 +54,14 @@ public class Pizza {
     )
     private List<Ingredienti> ingredienti;//questo nome è quello del mapping
 
+    @NotNull(message="Inserire un valore corretto")
+    @Min(value=0)
+    @Column(nullable = false)
+    private Integer quantitaPizza;
+
+    @OneToMany(mappedBy="pizza")
+    private List<RecordShop> recordShop;
+
 
     public List<Ingredienti> getIngredienti() {
         return ingredienti;
@@ -111,5 +119,13 @@ public class Pizza {
 
     public void setOfferteSpeciali(List<OfferteSpeciali> offerteSpeciali) {
         this.offerteSpeciali = offerteSpeciali;
+    }
+
+    public Integer getQuantitaPizza() {
+        return quantitaPizza;
+    }
+
+    public void setQuantitaPizza(Integer quantitaPizza) {
+        this.quantitaPizza = quantitaPizza;
     }
 }

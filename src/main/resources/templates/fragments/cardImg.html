@@ -28,12 +28,25 @@
               <button type="submit" class="btn btn-danger"
                 onclick="return confirm('Vuoi eliminare questa pizza?')">Elimina Pizza</button>
             </form>
+            <form class="mt-2" th:action="@{|/addShop/${pizza.id}|}" method="post">
+              <div class="input-group mb-2 justify-content-center">
+                <div class="input-group-text">
+                  <input name="idShop" value="1" class="form-check-input mt-0" type="checkbox"
+                    aria-label="Checkbox for following text input">
+
+                  <input name="quantitaPizzaCarrello" th:value="${quantitaPizzaCarrello}"
+                    placeholder="Inserisci la quantità" type="number" class="form-control"
+                    aria-label="Text input with checkbox">
+                </div>
+              </div>
+              <button type="submit" class="btn btn-success">Aggiungi Al Carrello</button>
+            </form>
           </div>
         </div>
       </div>
     </div>
 
-  <div th:replace="fragments/header :: bootstrapScript"></div>
+    <div th:replace="fragments/header :: bootstrapScript"></div>
 </body>
 
 </html>

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <div th:replace="fragments/header :: head"></div>
+  <link rel="stylesheet" href="/css/indexStyle.css" />
+</head>
+<div th:replace="~{fragments/navbar :: navbar}"></div>
+<div class="container mt-4">
+  <div th:if="${listaCarrello.isEmpty()}">
+    <p class="text-danger text-center">IL TUO CARRELLO È VUOTO</p>
+  </div>
+
+  <div th:unless="${listaCarrello.isEmpty()}">
+    <h1 class="text-danger text-center">ECCO IL TUO CARRELLO</h1>
+    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-4 mt-3">
+      <div class="col" th:each="carrello : ${listaCarrello}">
+        <div class="card h-100 text-bg-dark">
+          <img class="card-img-top img-fluid" th:src="@{${carrello.foto}}" alt="Foto pizza">
+          <div class="card-body text-center">
+            <h5 class="card-title" th:text="${carrello.descrizione}"></h5>
+            <p class="card-text">
+              <span th:text="|Quantità Magazzino: ${carrello.quantitaPizza}|"></span>
+              <br>
+              <span th:text="|Quantità nel Carrello: ${carrello.quantitaPizzaCarrello}|"></span>
+            </p>
+ <!--            <form action="#" th:action="@{|/delete/${carrello.pizzaId}|}" method="post" class="d-inline">
+              <button type="submit" class="btn btn-danger"
+                onclick="return confirm('Vuoi eliminare questa pizza?')">Elimina Pizza dal Carrello</button>
+            </form> -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+  <div th:replace="~{fragments/header :: bootstrapScript}"></div>
+  <div th:replace="~{fragments/footer :: footer}"></div>
+</body>
+
+</html>
+
