@@ -12,7 +12,7 @@
   <div th:if="${listaCarrello.isEmpty()}">
     <p class="text-danger text-center">IL TUO CARRELLO È VUOTO</p>
   </div>
-
+  <!-- carrello pieno -->
   <div th:unless="${listaCarrello.isEmpty()}">
     <h1 class="text-danger text-center">ECCO IL TUO CARRELLO</h1>
     <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-4 mt-3">
@@ -26,19 +26,45 @@
               <br>
               <span th:text="|Quantità nel Carrello: ${carrello.quantitaPizzaCarrello}|"></span>
             </p>
-                <form action="#" th:action="@{|/deleteShop/${carrello.idRecordShop}|}" method="post" class="d-inline">
-                <button type="submit" class="btn btn-danger"
+            <form action="#" th:action="@{|/deleteShop/${carrello.idRecordShop}|}" method="post" class="d-inline">
+              <button type="submit" class="btn btn-danger"
                 onclick="return confirm('Vuoi eliminare questa pizza?')">Elimina Pizza</button>
-                </form>
+            </form>
           </div>
         </div>
       </div>
     </div>
   </div>
+  </div>
+  <!-- sidebar -->
+   <div  class="text-center my-3">
+     <button class="btn btn-success" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight"
+  aria-controls="offcanvasRight">Riepilogo Carrello</button>
+
+<div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
+  <div class="offcanvas-header bg-success">
+    <h5 class="offcanvas-title text-light" id="offcanvasRightLabel">I Prodotti che hai selezionato</h5>
+    <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+  </div>
+  <div class="offcanvas-body bg-warning">
+    <h5 class="text-black">HAI SELEZIONATO - PRODOTTI</h5>
+    <h5 class="text-black"></h5>
+    <h5 class="text-black">TOTALE:</h5>
+    <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><!-- in attesa di inserire dati -->
+    <div class="container-fluid  d-flex justify-content-center my-3">
+      <img
+    class="logo"
+    src="\img\logo_navbar.png"
+    alt="logo"
+  />
+    </div>  
+  </div>
+   </div>
+ 
 </div>
-  <div th:replace="~{fragments/header :: bootstrapScript}"></div>
-  <div th:replace="~{fragments/footer :: footer}"></div>
+
+<div th:replace="~{fragments/header :: bootstrapScript}"></div>
+<div th:replace="~{fragments/footer :: footer}"></div>
 </body>
 
 </html>
-
