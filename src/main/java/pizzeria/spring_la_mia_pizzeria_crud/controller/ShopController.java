@@ -20,6 +20,7 @@ import pizzeria.spring_la_mia_pizzeria_crud.repository.PizzaRepository;
 import pizzeria.spring_la_mia_pizzeria_crud.repository.QuantitaPizzeRepository;
 import pizzeria.spring_la_mia_pizzeria_crud.repository.ShopRecordRepository;
 
+
 @Controller
 public class ShopController {
 
@@ -48,14 +49,13 @@ public class ShopController {
         List<RecordDtoView> carrello = recordShopRepository.findCarrelloView(idShop);
         Pizza pizza = pizzaRepository.findById(idPizza).get();
         boolean cercaPizza = false;
-        for (RecordDtoView record : carrello) {
-            if (pizza.getId().equals(record.getIdRecordShop())) {
+        for(RecordDtoView record : carrello){
+            if(pizza.getId().equals(record.getIdPizza())){
                 cercaPizza = true;
-
             }
         }
-        if (cercaPizza) {
-            redirectAttributes.addFlashAttribute("errorMessage", "pizza non aggiunta");
+        if(cercaPizza){
+            redirectAttributes.addFlashAttribute("errorMessage", "Pizza non aggiunta!");
             return "redirect:/pizze";
         }
         Shop shop = shopRepository.findById(idShop).get();
@@ -68,7 +68,7 @@ public class ShopController {
     }
 
     @GetMapping("/showShop/{id}")
-    public String showShop(@PathVariable Long id, Model model, Long idRecordShop) {
+    public String showShop(@PathVariable Long id, Model model) {
         List<RecordDtoView> carrello = recordShopRepository.findCarrelloView(id);
         model.addAttribute("listaCarrello", carrello);
         return "carrello/shop";
@@ -79,5 +79,6 @@ public class ShopController {
         recordShopRepository.deleteById(id);
         return "redirect:/showShop/1";
     }
+    
 
 }

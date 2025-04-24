@@ -11,7 +11,7 @@ import pizzeria.spring_la_mia_pizzeria_crud.model.RecordShop;
 public interface ShopRecordRepository extends JpaRepository<RecordShop, Long> {
 
     @Query(value = """
-        SELECT pi.foto, pi.descrizione, pi.quantita_pizza, rs.quantita_pizza_carrello as quantitaPizzaCarrello, rs.id as idRecordShop
+        SELECT pi.foto, pi.descrizione, pi.quantita_pizza, rs.quantita_pizza_carrello as quantitaPizzaCarrello,rs.id as idRecordShop, pi.id as pizzaId
         FROM pizze pi
         JOIN record_shop rs ON rs.pizza_id = pi.id
         WHERE rs.shop_id = ?1
