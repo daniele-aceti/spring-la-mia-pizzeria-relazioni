@@ -7,7 +7,7 @@ public class RecordDtoView {
     private int quantitaPizzaCarrello;
     private long idRecordShop;
 
-    public RecordDtoView(String foto, String descrizione, int quantitaPizza, int quantitaPizzaCarrello, Long idRecordShop){
+    public RecordDtoView(String foto, String descrizione, int quantitaPizza, int quantitaPizzaCarrello, long idRecordShop){
         this.foto = foto;
         this.descrizione= descrizione;
         this.quantitaPizza = quantitaPizza;
