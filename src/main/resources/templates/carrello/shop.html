@@ -26,10 +26,10 @@
               <br>
               <span th:text="|Quantità nel Carrello: ${carrello.quantitaPizzaCarrello}|"></span>
             </p>
- <!--            <form action="#" th:action="@{|/delete/${carrello.pizzaId}|}" method="post" class="d-inline">
-              <button type="submit" class="btn btn-danger"
-                onclick="return confirm('Vuoi eliminare questa pizza?')">Elimina Pizza dal Carrello</button>
-            </form> -->
+                <form action="#" th:action="@{|/deleteShop/${carrello.idRecordShop}|}" method="post" class="d-inline">
+                <button type="submit" class="btn btn-danger"
+                onclick="return confirm('Vuoi eliminare questa pizza?')">Elimina Pizza</button>
+                </form>
           </div>
         </div>
       </div>
