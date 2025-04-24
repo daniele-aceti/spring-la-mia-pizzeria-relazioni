@@ -41,6 +41,9 @@
               </div>
               <button type="submit" class="btn btn-success">Aggiungi Al Carrello</button>
             </form>
+            <th:block>
+              <p th:if="${errorMessage}" th:text="${errorMessage}"></p>
+            </th:block>
           </div>
         </div>
       </div>

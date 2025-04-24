@@ -16,6 +16,7 @@ public class RecordShop {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+
     @NotNull
     @Min(value = 0)
     private Integer quantitaPizzaCarrello;

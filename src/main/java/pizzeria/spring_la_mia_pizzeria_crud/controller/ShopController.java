@@ -8,6 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import pizzeria.spring_la_mia_pizzeria_crud.dto.RecordDtoView;
 import pizzeria.spring_la_mia_pizzeria_crud.model.Pizza;
@@ -18,7 +19,6 @@ import pizzeria.spring_la_mia_pizzeria_crud.repository.IngredientiRepository;
 import pizzeria.spring_la_mia_pizzeria_crud.repository.PizzaRepository;
 import pizzeria.spring_la_mia_pizzeria_crud.repository.QuantitaPizzeRepository;
 import pizzeria.spring_la_mia_pizzeria_crud.repository.ShopRecordRepository;
-
 
 @Controller
 public class ShopController {
@@ -43,8 +43,21 @@ public class ShopController {
             @PathVariable Long idPizza,
             Long idShop,
             Integer quantitaPizzaCarrello,
-            Model model) {
+            Model model,
+            RedirectAttributes redirectAttributes) {
+        List<RecordDtoView> carrello = recordShopRepository.findCarrelloView(idShop);
         Pizza pizza = pizzaRepository.findById(idPizza).get();
+        boolean cercaPizza = false;
+        for (RecordDtoView record : carrello) {
+            if (pizza.getId().equals(record.getIdRecordShop())) {
+                cercaPizza = true;
+
+            }
+        }
+        if (cercaPizza) {
+            redirectAttributes.addFlashAttribute("errorMessage", "pizza non aggiunta");
+            return "redirect:/pizze";
+        }
         Shop shop = shopRepository.findById(idShop).get();
         RecordShop recordShop = new RecordShop();
         recordShop.setPizza(pizza);
@@ -55,15 +68,16 @@ public class ShopController {
     }
 
     @GetMapping("/showShop/{id}")
-    public String showShop(@PathVariable Long id, Model model) {
+    public String showShop(@PathVariable Long id, Model model, Long idRecordShop) {
         List<RecordDtoView> carrello = recordShopRepository.findCarrelloView(id);
         model.addAttribute("listaCarrello", carrello);
         return "carrello/shop";
     }
 
-    
-
-
-    
+    @PostMapping("/deleteShop/{id}")
+    public String delete(@PathVariable Long id) {
+        recordShopRepository.deleteById(id);
+        return "redirect:/showShop/1";
+    }
 
 }
