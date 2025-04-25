@@ -15,10 +15,9 @@
   <div th:if="${listaCarrello.isEmpty()}">
     <p class="text-danger text-center">IL TUO CARRELLO È VUOTO</p>
   </div>
-
-<!-- pizze esaurite -->
+  <!-- pizze con poca disponibilità-->
   <div class="row row-cols-1 row-cols-md-3 g-4 mt-3 mx-auto">
-    <div class="col" th:each="pizza : ${listaCarrello}" th:if="${pizza.quantitaPizza <= 0}">
+    <div class="col" th:each="pizza : ${listaCarrello}" th:if="${pizza.quantitaPizza < pizza.quantitaPizzaCarrello}">
       <div class="text-light">
         <h2 class="card-header text-center" th:text="${pizza.descrizione}"></h2>
         <div class="contenitore-immagine pizza-esaurita position-relative" style=" opacity:0.8">
@@ -29,6 +28,10 @@
         </div>
         <div class="card-body text-center">
           <p class="card-text" th:text="|QUANTINTA MAGAZZINO: ${pizza.quantitaPizza}|"></p>
+          <form action="#" th:action="@{|/deleteShop/${pizza.idRecordShop}|}" method="post" class="d-inline">
+            <button type="submit" class="btn btn-danger"
+              onclick="return confirm('Vuoi eliminare questa pizza?')">Elimina Pizza</button>
+          </form>
      </div>
       </div>
     </div>
@@ -37,7 +40,7 @@
   <!-- carrello pieno -->
   <div th:unless="${listaCarrello.isEmpty()}">
     <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-4 mt-3">
-      <div class="col" th:each="carrello : ${listaCarrello}" th:if="${carrello.quantitaPizza > 0}">
+      <div class="col" th:each="carrello : ${listaCarrello}" th:if="${carrello.quantitaPizza > carrello.quantitaPizzaCarrello}">
         <div class="card h-100 text-bg-dark">
           <div class="contenitore-immagine">
               <img class="card-img-top img-fluid" th:src="@{${carrello.foto}}" alt="Foto pizza">

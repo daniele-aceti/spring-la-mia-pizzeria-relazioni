@@ -74,18 +74,11 @@ public class ShopController {
 
 @PostMapping("/modificaShop/{id}")
 public String modificaShop(@PathVariable Long id,
-                           @RequestParam("quantitaPizzaCarrello") int nuovaQuantita/* , Model model */) {
+                           @RequestParam("quantitaPizzaCarrello") int nuovaQuantita) {
                             
-/*     Pizza recordPizza = pizzaRepository.findById(id).get(); */
     RecordShop record = recordShopRepository.findById(id).get();//ho preso l'oggetto RecordShop
-/*     Integer quantitaCarrello = record.getQuantitaPizzaCarrello();
-    Integer quantitaMagazzino = recordPizza.getQuantitaPizza(); */
-/*     if(quantitaCarrello > quantitaMagazzino){ */
         record.setQuantitaPizzaCarrello(nuovaQuantita);//ho variato SOLO la quantità altrimenti dovevo fare un form
         recordShopRepository.save(record);
-    /* }else{
-        model.addAttribute("errorMessage", "La quantità del carrello è maggiore a quella disponibile");
-    } */
 
 
     return "redirect:/showShop/1";
