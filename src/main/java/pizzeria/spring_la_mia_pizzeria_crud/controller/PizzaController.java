@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import jakarta.validation.Valid;
 import pizzeria.spring_la_mia_pizzeria_crud.model.OfferteSpeciali;
@@ -22,6 +21,7 @@ import pizzeria.spring_la_mia_pizzeria_crud.repository.IngredientiRepository;
 import pizzeria.spring_la_mia_pizzeria_crud.repository.OfferteRepository;
 import pizzeria.spring_la_mia_pizzeria_crud.repository.PizzaRepository;
 import pizzeria.spring_la_mia_pizzeria_crud.repository.QuantitaPizzeRepository;
+import pizzeria.spring_la_mia_pizzeria_crud.service.PizzaService;
 
 
 @Controller
@@ -29,6 +29,12 @@ import pizzeria.spring_la_mia_pizzeria_crud.repository.QuantitaPizzeRepository;
 
 public class PizzaController {
 
+    private final QuantitaPizzeRepository quantitaPizzeRepository;
+
+    @Autowired
+    private PizzaService pizzaService;
+
+    @Autowired
     private final OfferteRepository offerteRepository;
 
     @Autowired
@@ -37,11 +43,10 @@ public class PizzaController {
     @Autowired
     private IngredientiRepository ingredientiRepository;
 
-    @Autowired
-    private QuantitaPizzeRepository quantitaPizzeRepository;
 
-    PizzaController(OfferteRepository offerteRepository) {
+    PizzaController(OfferteRepository offerteRepository, QuantitaPizzeRepository quantitaPizzeRepository) {
         this.offerteRepository = offerteRepository;
+        this.quantitaPizzeRepository = quantitaPizzeRepository;
     }
 
     @GetMapping
@@ -56,13 +61,7 @@ public class PizzaController {
 
     @GetMapping("/pizze")
     public String index(Model model, @RequestParam(name = "keyword", required = false) String findPizza) {
-        List<Pizza> result;
-        if (findPizza != null && !findPizza.isBlank()) {
-            result = pizzaRepository.findByNomeContainingIgnoreCase(findPizza);
-        } else {
-            result = pizzaRepository.findAll();
-        }
-        model.addAttribute("pizzaList", result);
+        model.addAttribute("pizzaList", pizzaService.findPizzaList(findPizza));
         return "pizze/index";
     }
 
@@ -92,8 +91,7 @@ public class PizzaController {
     @PostMapping("/create")
     public String store(@Valid @ModelAttribute("pizza") Pizza formPizza,
             BindingResult bindingResult,
-            Model model,
-            RedirectAttributes redirectAttributes) {
+            Model model) {
 
         if (bindingResult.hasErrors()) {
             model.addAttribute("listaIngredienti", ingredientiRepository.findAll());
@@ -101,8 +99,6 @@ public class PizzaController {
         }
 
         pizzaRepository.save(formPizza);
-
-        //redirectAttributes.addFlashAttribute("successMessage", "Pizza creata!");
         return "redirect:/pizze";
     }
 
@@ -131,12 +127,7 @@ public class PizzaController {
 
     @PostMapping("/delete/{id}")
     public String delete(@PathVariable("id") Long id) {
-        Pizza pizza = pizzaRepository.findById(id).get();
-        for (OfferteSpeciali of : pizza.getOfferteSpeciali()) {
-            offerteRepository.delete(of);
-        }
-        pizzaRepository.deleteById(id);
-
+        pizzaService.deleteById(id);
         return "redirect:/pizze";
     }
 

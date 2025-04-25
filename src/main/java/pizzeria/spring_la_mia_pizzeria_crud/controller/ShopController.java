@@ -8,6 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import pizzeria.spring_la_mia_pizzeria_crud.dto.RecordDtoView;
@@ -15,23 +16,14 @@ import pizzeria.spring_la_mia_pizzeria_crud.model.Pizza;
 import pizzeria.spring_la_mia_pizzeria_crud.model.RecordShop;
 import pizzeria.spring_la_mia_pizzeria_crud.model.Shop;
 import pizzeria.spring_la_mia_pizzeria_crud.repository.CarrelloRepository;
-import pizzeria.spring_la_mia_pizzeria_crud.repository.IngredientiRepository;
 import pizzeria.spring_la_mia_pizzeria_crud.repository.PizzaRepository;
-import pizzeria.spring_la_mia_pizzeria_crud.repository.QuantitaPizzeRepository;
 import pizzeria.spring_la_mia_pizzeria_crud.repository.ShopRecordRepository;
-
 
 @Controller
 public class ShopController {
 
     @Autowired
     private PizzaRepository pizzaRepository;
-
-    @Autowired
-    private IngredientiRepository ingredientiRepository;
-
-    @Autowired
-    private QuantitaPizzeRepository quantitaPizzeRepository;
 
     @Autowired
     private CarrelloRepository shopRepository;
@@ -49,12 +41,12 @@ public class ShopController {
         List<RecordDtoView> carrello = recordShopRepository.findCarrelloView(idShop);
         Pizza pizza = pizzaRepository.findById(idPizza).get();
         boolean cercaPizza = false;
-        for(RecordDtoView record : carrello){
-            if(pizza.getId().equals(record.getIdPizza())){
+        for (RecordDtoView record : carrello) {
+            if (pizza.getId().equals(record.getIdPizza())) {
                 cercaPizza = true;
             }
         }
-        if(cercaPizza){
+        if (cercaPizza) {
             redirectAttributes.addFlashAttribute("errorMessage", "Pizza non aggiunta!");
             return "redirect:/pizze";
         }
@@ -79,6 +71,24 @@ public class ShopController {
         recordShopRepository.deleteById(id);
         return "redirect:/showShop/1";
     }
-    
+
+@PostMapping("/modificaShop/{id}")
+public String modificaShop(@PathVariable Long id,
+                           @RequestParam("quantitaPizzaCarrello") int nuovaQuantita/* , Model model */) {
+                            
+/*     Pizza recordPizza = pizzaRepository.findById(id).get(); */
+    RecordShop record = recordShopRepository.findById(id).get();//ho preso l'oggetto RecordShop
+/*     Integer quantitaCarrello = record.getQuantitaPizzaCarrello();
+    Integer quantitaMagazzino = recordPizza.getQuantitaPizza(); */
+/*     if(quantitaCarrello > quantitaMagazzino){ */
+        record.setQuantitaPizzaCarrello(nuovaQuantita);//ho variato SOLO la quantità altrimenti dovevo fare un form
+        recordShopRepository.save(record);
+    /* }else{
+        model.addAttribute("errorMessage", "La quantità del carrello è maggiore a quella disponibile");
+    } */
+
+
+    return "redirect:/showShop/1";
+}
 
 }
