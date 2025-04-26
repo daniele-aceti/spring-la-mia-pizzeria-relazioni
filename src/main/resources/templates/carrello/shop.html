@@ -9,6 +9,12 @@
 </head>
 <div th:replace="~{fragments/navbar :: navbar}"></div>
 <h1 class="text-danger text-center">ECCO IL TUO CARRELLO</h1>
+<div th:if="${modifica}" class="alert alert-success text-center">
+  <p th:text="${modifica}"></p>
+</div>
+<div th:if="${errore}" class="alert alert-danger text-center">
+  <p th:text="${errore}"></p>
+</div>
 <div class="container mt-4">
 
   <!-- carrello vuoto -->
@@ -17,7 +23,7 @@
   </div>
   <!-- pizze con poca disponibilità-->
   <div class="row row-cols-1 row-cols-md-3 g-4 mt-3 mx-auto">
-    <div class="col" th:each="pizza : ${listaCarrello}" th:if="${pizza.quantitaPizza < pizza.quantitaPizzaCarrello}">
+    <div class="col" th:each="pizza : ${listaCarrello}" th:if="${pizza.quantitaPizza <= 0}">
       <div class="text-light">
         <h2 class="card-header text-center" th:text="${pizza.descrizione}"></h2>
         <div class="contenitore-immagine pizza-esaurita position-relative" style=" opacity:0.8">
@@ -40,7 +46,7 @@
   <!-- carrello pieno -->
   <div th:unless="${listaCarrello.isEmpty()}">
     <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-4 mt-3">
-      <div class="col" th:each="carrello : ${listaCarrello}" th:if="${carrello.quantitaPizza > carrello.quantitaPizzaCarrello}">
+      <div class="col" th:each="carrello : ${listaCarrello}" th:if="${carrello.quantitaPizza > 0}">
         <div class="card h-100 text-bg-dark">
           <div class="contenitore-immagine">
               <img class="card-img-top img-fluid" th:src="@{${carrello.foto}}" alt="Foto pizza">

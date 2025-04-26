@@ -72,16 +72,30 @@ public class ShopController {
         return "redirect:/showShop/1";
     }
 
-@PostMapping("/modificaShop/{id}")
-public String modificaShop(@PathVariable Long id,
-                           @RequestParam("quantitaPizzaCarrello") int nuovaQuantita) {
-                            
-    RecordShop record = recordShopRepository.findById(id).get();//ho preso l'oggetto RecordShop
-        record.setQuantitaPizzaCarrello(nuovaQuantita);//ho variato SOLO la quantità altrimenti dovevo fare un form
+    @PostMapping("/modificaShop/{id}")
+    public String modificaShop(@PathVariable Long id,
+                               @RequestParam("quantitaPizzaCarrello") int nuovaQuantita,
+                               RedirectAttributes redirectAttributes) {
+    
+        RecordShop record = recordShopRepository.findById(id).get();
+    
+        if (record == null || record.getPizza() == null) {
+            redirectAttributes.addFlashAttribute("errore", "Record o pizza non trovati!");
+            return "redirect:/showShop/1";
+        }
+    
+        Pizza pizza = record.getPizza(); // prendo la pizza associata al record
+        Integer quantitaMagazzino = pizza.getQuantitaPizza();
+    
+        if (nuovaQuantita > quantitaMagazzino) {
+            redirectAttributes.addFlashAttribute("errore", "Quantità richiesta superiore alla disponibilità in magazzino!");
+            return "redirect:/showShop/1";
+        }
+
+        redirectAttributes.addFlashAttribute("modifica", "Quantità modificata!");
+        record.setQuantitaPizzaCarrello(nuovaQuantita);
         recordShopRepository.save(record);
-
-
-    return "redirect:/showShop/1";
-}
-
+    
+        return "redirect:/showShop/1";
+    }
 }
