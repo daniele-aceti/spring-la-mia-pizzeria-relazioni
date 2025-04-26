@@ -94,8 +94,11 @@
     </div>
     <div class="offcanvas-body bg-warning">
       <h5 class="text-black">HAI SELEZIONATO <th:block th:text="${listaCarrello.size()}"></th:block> PRODOTTI</h5>
-      <h5 class="text-black"><th:block th:each="carrello : ${listaCarrello}" th:utext="'🍕' +${carrello.descrizione} + '<br>'"></th:block></h5>
-      <h5 class="text-black">TOTALE:</h5>
+      <h5 class="text-black" th:each="carrello : ${listaCarrello}" >
+        <th:block th:if="${carrello.quantitaPizza > 0}" th:utext="'🍕' +${carrello.descrizione} + '<br>'">
+        </th:block>
+      </h5>
+      <h5 class="text-black">TOTALE: <p th:text="${prezzoCarrello} + '€'"></p></h5>
       <div class="container-fluid  d-flex justify-content-center my-3">
         <img class="logo" src="\img\logo_navbar.png" alt="logo" />
       </div>

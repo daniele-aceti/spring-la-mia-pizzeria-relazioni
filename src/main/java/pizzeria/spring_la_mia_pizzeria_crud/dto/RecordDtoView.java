@@ -7,18 +7,20 @@ public class RecordDtoView {
     private int quantitaPizzaCarrello;
     private long idRecordShop;
     private long idPizza;
+    private Double prezzo;
 
     public RecordDtoView(String foto, String descrizione, int quantitaPizza,
-                         int quantitaPizzaCarrello, long idRecordShop, long idPizza){
+                         int quantitaPizzaCarrello, long idRecordShop, long idPizza,
+                         Double prezzo){
         this.foto = foto;
         this.descrizione= descrizione;
         this.quantitaPizza = quantitaPizza;
         this.quantitaPizzaCarrello = quantitaPizzaCarrello;
         this.idRecordShop = idRecordShop;
         this.idPizza = idPizza;
+        this.prezzo = prezzo;
     }
 
-    
 
     public String getFoto() {
         return foto;
@@ -74,6 +76,22 @@ public class RecordDtoView {
 
     public void setIdPizza(long idPizza) {
         this.idPizza = idPizza;
+    }
+
+
+
+
+
+    public Double getPrezzo() {
+        return prezzo;
+    }
+
+
+
+
+
+    public void setPrezzo(Double prezzo) {
+        this.prezzo = prezzo;
     }
 
    

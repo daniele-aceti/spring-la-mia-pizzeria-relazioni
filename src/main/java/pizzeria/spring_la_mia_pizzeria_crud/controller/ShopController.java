@@ -63,6 +63,16 @@ public class ShopController {
     public String showShop(@PathVariable Long id, Model model) {
         List<RecordDtoView> carrello = recordShopRepository.findCarrelloView(id);
         model.addAttribute("listaCarrello", carrello);
+        Double sum = 0.0;
+        for(RecordDtoView pizza : carrello){
+            if(pizza.getQuantitaPizza() >= pizza.getQuantitaPizzaCarrello()){
+                sum += (pizza.getPrezzo() * pizza.getQuantitaPizzaCarrello()); 
+            }else{
+                continue;
+            }
+
+        }
+        model.addAttribute("prezzoCarrello", sum);
         return "carrello/shop";
     }
 
