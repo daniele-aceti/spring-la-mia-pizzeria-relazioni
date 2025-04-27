@@ -40,16 +40,14 @@ public class ShopController {
             RedirectAttributes redirectAttributes) {
         List<RecordDtoView> carrello = recordShopRepository.findCarrelloView(idShop);
         Pizza pizza = pizzaRepository.findById(idPizza).get();
-        boolean cercaPizza = false;
         for (RecordDtoView record : carrello) {
             if (pizza.getId().equals(record.getIdPizza())) {
-                cercaPizza = true;
+                redirectAttributes.addFlashAttribute("errorMessage",
+                        "Pizza non aggiunta, modifica la quantità nel carrello");
+                return "redirect:/pizze";
             }
         }
-        if (cercaPizza) {
-            redirectAttributes.addFlashAttribute("errorMessage", "Pizza non aggiunta!");
-            return "redirect:/pizze";
-        }
+        redirectAttributes.addFlashAttribute("successMessage", "La pizza è stata aggiunta nel carrello");
         Shop shop = shopRepository.findById(idShop).get();
         RecordShop recordShop = new RecordShop();
         recordShop.setPizza(pizza);
@@ -64,10 +62,10 @@ public class ShopController {
         List<RecordDtoView> carrello = recordShopRepository.findCarrelloView(id);
         model.addAttribute("listaCarrello", carrello);
         Double sum = 0.0;
-        for(RecordDtoView pizza : carrello){
-            if(pizza.getQuantitaPizza() >= pizza.getQuantitaPizzaCarrello()){
-                sum += (pizza.getPrezzo() * pizza.getQuantitaPizzaCarrello()); 
-            }else{
+        for (RecordDtoView pizza : carrello) {
+            if (pizza.getQuantitaPizza() >= pizza.getQuantitaPizzaCarrello()) {
+                sum += (pizza.getPrezzo() * pizza.getQuantitaPizzaCarrello());
+            } else {
                 continue;
             }
 
@@ -84,28 +82,28 @@ public class ShopController {
 
     @PostMapping("/modificaShop/{id}")
     public String modificaShop(@PathVariable Long id,
-                               @RequestParam("quantitaPizzaCarrello") int nuovaQuantita,
-                               RedirectAttributes redirectAttributes) {
-    
+            @RequestParam("quantitaPizzaCarrello") int nuovaQuantita,
+            RedirectAttributes redirectAttributes) {
+
         RecordShop record = recordShopRepository.findById(id).get();
-    
+
         if (record == null || record.getPizza() == null) {
             redirectAttributes.addFlashAttribute("errore", "Record o pizza non trovati!");
             return "redirect:/showShop/1";
         }
-    
+
         Pizza pizza = record.getPizza(); // prendo la pizza associata al record
         Integer quantitaMagazzino = pizza.getQuantitaPizza();
-    
+
         if (nuovaQuantita > quantitaMagazzino) {
-            redirectAttributes.addFlashAttribute("errore", "Quantità richiesta superiore alla disponibilità in magazzino!");
+            redirectAttributes.addFlashAttribute("errore", "Quantità: " + nuovaQuantita + " il valore inserito supera la disponibilità in magazzino!");
             return "redirect:/showShop/1";
         }
 
-        redirectAttributes.addFlashAttribute("modifica", "Quantità modificata!");
+        redirectAttributes.addFlashAttribute("modifica", "Modifica eseguita la " + record.getPizza().getNome() + " ora ha quantità " + nuovaQuantita);
         record.setQuantitaPizzaCarrello(nuovaQuantita);
         recordShopRepository.save(record);
-    
+
         return "redirect:/showShop/1";
     }
 }

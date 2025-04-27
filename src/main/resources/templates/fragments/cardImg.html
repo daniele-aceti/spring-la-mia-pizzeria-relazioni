@@ -9,6 +9,12 @@
 
 <body class="container-fluid" th:fragment="card">
   <h1 class="text-danger container text-center">SELEZIONATE PER VOI</h1>
+  <div th:if="${errorMessage}" class="alert alert-danger text-center">
+    <p th:text="${errorMessage}"></p>
+  </div>
+  <div th:if="${successMessage}" class="alert alert-success text-center">
+    <p th:text="${successMessage}"></p>
+  </div>
   <!-- nessuna pizza presente -->
   <div th:if="${pizzaList.isEmpty()}">
     <p class="text-danger text-center">NESSUNA PIZZA PRESENTE</p>
@@ -67,9 +73,6 @@
               </div>
               <button type="submit" class="btn btn-success">Aggiungi Al Carrello</button>
             </form>
-            <th:block>
-              <p th:if="${errorMessage}" th:text="${errorMessage}"></p>
-            </th:block>
           </div>
         </div>
       </div>

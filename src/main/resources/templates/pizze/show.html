@@ -17,6 +17,7 @@
         <img class="img-fluid mt-5" th:src="*{foto}" />
       </div>
       <h2 class="text-light text-center" th:text="*{nome}"></h2>
+      <title>Dettaglio pizza <th:block th:text="*{nome}"  > </th:block> </title>
       <p class="text-danger text-center">Descrizione:</p>
       <p class="text-danger text-center" th:text="*{descrizione}"></p>
       <h3 class="text-center text-success">Ingredienti:</h3>
