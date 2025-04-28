@@ -1,6 +1,5 @@
 package pizzeria.spring_la_mia_pizzeria_crud.controller;
 
-import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -118,6 +117,7 @@ public class PizzaController {
             Model model) {
 
         if (bindingResult.hasErrors()) {
+            model.addAttribute("listaIngredienti", ingredientiRepository.findAll());
             return "/pizze/modificaPizza";
         }
         pizzaRepository.save(formPizza);
@@ -140,32 +140,5 @@ public class PizzaController {
         return "offerte/edit";
     }
 
-    @GetMapping("/modificaAdmin")
-    public String editAdmin(Model model) {
-        List<Pizza> pizza = pizzaRepository.findAll();
-        Pizza newPizza = new Pizza();
-        model.addAttribute("newPizza", newPizza);
-        model.addAttribute("pizza", pizza);
-
-        return "pizze/adminModifica";
-    }
-
-    @PostMapping("/modificaAdmin")
-    public String updateAdmmin(
-            @Valid @ModelAttribute("modificaPizza") Pizza formPizza,
-            BindingResult bindingResult,
-            Model model) {
-
-        if (bindingResult.hasErrors()) {
-            return "/pizze/adminModifica";
-        }
-        pizzaRepository.save(formPizza);
-
-        return "redirect:/pizze";
-    }
-
-
-    
-
-
+   
 }

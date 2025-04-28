@@ -16,20 +16,20 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @NotBlank
+    @NotBlank(message="Inserire un valore corretto")
     @Column(length = 50, nullable = false)
     private String nome;
 
-    @NotBlank
+    @NotBlank(message="Inserire un valore corretto")
     @Column(length = 50, nullable = false)
     private String username;
 
-    @NotBlank
+    @NotBlank(message="Inserire un valore corretto")
     @Column(nullable = false)
     private String cognome;
 
 
-    @NotBlank
+    @NotBlank(message="Inserire un valore corretto")
     @Column(nullable = false)
     private String password;
 

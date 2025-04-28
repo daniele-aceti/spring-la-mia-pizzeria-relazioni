@@ -19,7 +19,7 @@ public class Shop {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotBlank
+    @NotBlank(message="Inserire un valore corretto")
     @DateTimeFormat(pattern="yyy-MM-dd")
     private LocalDate dataDiCreazione;
 

@@ -38,8 +38,20 @@ public class ShopController {
             Integer quantitaPizzaCarrello,
             Model model,
             RedirectAttributes redirectAttributes) {
+
+                //controllo quantità carrello
+        if (quantitaPizzaCarrello == null || quantitaPizzaCarrello <= 0) {
+            redirectAttributes.addFlashAttribute("errorMessage",
+             "Hai inserito una quantità uguale o inferiore a zero");
+            return "redirect:/pizze";
+        }
         List<RecordDtoView> carrello = recordShopRepository.findCarrelloView(idShop);
         Pizza pizza = pizzaRepository.findById(idPizza).get();
+        //pizza NO null
+        if (pizza == null) {
+            redirectAttributes.addFlashAttribute("errorMessage", "Pizza non trovata");
+            return "redirect:/pizze";
+        }
         for (RecordDtoView record : carrello) {
             if (pizza.getId().equals(record.getIdPizza())) {
                 redirectAttributes.addFlashAttribute("errorMessage",
@@ -49,6 +61,11 @@ public class ShopController {
         }
         redirectAttributes.addFlashAttribute("successMessage", "La pizza è stata aggiunta nel carrello");
         Shop shop = shopRepository.findById(idShop).get();
+        //shop NO null
+        if (shop == null) {
+            redirectAttributes.addFlashAttribute("errorMessage", "Pizza non trovata");
+            return "redirect:/pizze";
+        }
         RecordShop recordShop = new RecordShop();
         recordShop.setPizza(pizza);
         recordShop.setShop(shop);
@@ -63,12 +80,10 @@ public class ShopController {
         model.addAttribute("listaCarrello", carrello);
         Double sum = 0.0;
         for (RecordDtoView pizza : carrello) {
-            if (pizza.getQuantitaPizza() >= pizza.getQuantitaPizzaCarrello()) {
+                if (pizza.getQuantitaPizzaCarrello() > pizza.getQuantitaPizza()) {
+                    pizza.setQuantitaPizzaCarrello(pizza.getQuantitaPizza());
+                }
                 sum += (pizza.getPrezzo() * pizza.getQuantitaPizzaCarrello());
-            } else {
-                continue;
-            }
-
         }
         model.addAttribute("prezzoCarrello", sum);
         return "carrello/shop";

@@ -41,8 +41,8 @@
                   th:field="*{descrizione}"
                   th:errorClass="is-invalid"
                 ></textarea>
-                <ul th:if="${#fields.hasErrors('nome')}">
-                  <li th:each="err : ${#fields.errors('nome')}" class="text-danger" th:text="${err}"></li>
+                <ul th:if="${#fields.hasErrors('descrizione')}">
+                  <li th:each="err : ${#fields.errors('descrizione')}" class="text-danger" th:text="${err}"></li>
               </ul>
               </div>
               <div class="col-12">
@@ -54,21 +54,21 @@
                   th:field="*{foto}"
                   th:errorClass="is-invalid"
                 />
-                <ul th:if="${#fields.hasErrors('nome')}">
-                  <li th:each="err : ${#fields.errors('nome')}" class="text-danger" th:text="${err}"></li>
+                <ul th:if="${#fields.hasErrors('foto')}">
+                  <li th:each="err : ${#fields.errors('foto')}" class="text-danger" th:text="${err}"></li>
               </ul>
               </div>
               <div class="col-12">
                 <label class="form-label text-light">Prezzo</label>
                 <input
-                  type="text"
+                  type="number"
                   class="form-control"
                   id="prezzo"
                   th:field="*{prezzo}"
                   th:errorClass="is-invalid"
                 />
-                <ul th:if="${#fields.hasErrors('nome')}">
-                  <li th:each="err : ${#fields.errors('nome')}" class="text-danger" th:text="${err}"></li>
+                <ul th:if="${#fields.hasErrors('prezzo')}">
+                  <li th:each="err : ${#fields.errors('prezzo')}" class="text-danger" th:text="${err}"></li>
               </ul>
               </div>
               <div class="col-12">
@@ -80,8 +80,8 @@
                   th:field="*{quantitaPizza}"
                   th:errorClass="is-invalid"
                 />
-                <ul th:if="${#fields.hasErrors('nome')}">
-                  <li th:each="err : ${#fields.errors('nome')}" class="text-danger" th:text="${err}"></li>
+                <ul th:if="${#fields.hasErrors('quantitaPizza')}">
+                  <li th:each="err : ${#fields.errors('quantitaPizza')}" class="text-danger" th:text="${err}"></li>
               </ul>
               </div>
               <div class="form-check" th:each="item : ${listaIngredienti}">

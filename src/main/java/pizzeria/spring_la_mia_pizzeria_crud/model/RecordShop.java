@@ -17,8 +17,8 @@ public class RecordShop {
     private Long id;
 
 
-    @NotNull
-    @Min(value = 0)
+    @NotNull(message="Inserire un valore corretto")
+    @Min(value = 1)
     private Integer quantitaPizzaCarrello;
 
     //RELAZIONE PIZZA

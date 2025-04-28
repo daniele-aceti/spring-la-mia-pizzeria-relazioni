@@ -22,16 +22,16 @@ public class OfferteSpeciali {
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     private Long id;
 
-    @NotNull
+    @NotNull(message="Inserire un valore corretto")
     @DateTimeFormat(pattern="yyy-MM-dd")
     private LocalDate dataInizio;
 
 
-    @NotNull
+    @NotNull(message="Inserire un valore corretto")
     @DateTimeFormat(pattern="yyy-MM-dd")
     private LocalDate dataFine;
 
-    @NotBlank
+    @NotBlank(message="Inserire un valore corretto")
     private String titolo;
 
     @ManyToOne
